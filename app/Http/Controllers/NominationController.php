@@ -87,6 +87,8 @@ class NominationController extends Controller
         return back()->withErrors(['error' => 'You have already nominated in this category.']);
     }
 
+
+    
     $ip = $request->ip(); // Get IP address
     // $response = Http::get("http://ip-api.com/json/{$ip}"); // Fetch geolocation data
     // $location = $response->successful() ?
