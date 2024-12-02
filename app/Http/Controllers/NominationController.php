@@ -88,7 +88,7 @@ class NominationController extends Controller
     }
 
 
-    
+
     $ip = $request->ip(); // Get IP address
     // $response = Http::get("http://ip-api.com/json/{$ip}"); // Fetch geolocation data
     // $location = $response->successful() ?
@@ -109,6 +109,6 @@ class NominationController extends Controller
         'location' => $location, // Save location
     ]);
 
-    return redirect()->route('nomination.create')->with('success', 'Nomination submitted successfully!');
+    return redirect()->route('nomination.create')->with('success', 'Nomination submitted successfully, go to the next category.');
 }
 }
