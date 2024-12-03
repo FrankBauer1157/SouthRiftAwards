@@ -150,6 +150,7 @@
                 <div id="responseMessage" class="alert" style="display: block;"></div> <!-- This will display the message -->
             </div>
             <div class="modal-footer">
+                <label>Patron: Kenda Vin</label>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
