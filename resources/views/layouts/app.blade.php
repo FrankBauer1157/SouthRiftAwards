@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- //meta tags for SEO and social media integration --}}
+    <meta name="description" content="South Rift Matatu Awards is a prestigious event held annually in Kenya, featuring innovative and inspiring projects that showcase the talents, safety and creativity of South Rift residents.">
+    <meta name="keywords" content="South Rift, Rift-Valley, Kenya, Matatu Awards, projects, innovative, creativity, talent">
+    <meta property="og:title" content="South Rift Matatu Awards">
+    <meta property="og:description" content="South Rift Matatu Awards is a prestigious event held annually in Bomet, Kenya, featuring innovative and inspiring projects that showcase the talents and creativity of South Rift residents.">
+
     <title>South Rift Matatu Awards</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
