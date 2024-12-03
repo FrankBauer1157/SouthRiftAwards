@@ -72,9 +72,14 @@ public function store(Request $request)
         'location' => $location,
     ]);
 
+    $categ_name = Category::find($request->category_id)->name;
+
+
+    $message = 'Thank you for nominating '. $request->name .' as the '. $categ_name .' in South-Rift Matatu Awards -2024.';
+
     return response()->json([
         'success' => true,
-        'message' => 'Nomination submitted successfully! Please proceed to the next category.'
+        'message' => $message,
     ], 200);
 }
 

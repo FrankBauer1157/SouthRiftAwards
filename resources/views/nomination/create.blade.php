@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             // Display the message in the modal
             responseMessage.textContent = data.message;
-            responseMessage.style.color = data.success ? 'green' : 'red'; // Success = green, error = red
+            responseMessage.style.color = data.success ? 'black' : 'red'; // Success = green, error = red
 
             // Set the image based on success/failure
             if (data.success) {
