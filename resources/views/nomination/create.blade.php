@@ -89,11 +89,12 @@
     <div id="info" class="col-md-4">
         <img src="{{ asset('success.png') }}" alt="Nominate" class="img-fluid">
         {{-- <p class="text-muted">Submit your nomination for the South-Rift Matatu Awards 2024.</p> --}}
-        <p class="text-muted">Please note that all nominations will be reviewed by the judges and may be subject to change.</p>
-        <p class="text-muted">Please provide accurate and relevant information.</p>
-        <!-- once the nomination is complete, awardee shall be listed and election shall be held. -->
-        <p class="text-muted">Please note, this is the nomination phase. Voting for the South-Rift Matatu Awards 2024 will take place immediately after nominations are complete.</p>
-
+        <ul>
+            <li class="text-muted">Please note that all nominations will be reviewed by the judges and may be subject to change.</li>
+            <li class="text-muted">Please provide accurate and relevant information.</li>
+            <!-- once the nomination is complete, awardee shall be listed and election shall be held. -->
+            <li class="text-muted">Please note, this is the nomination phase. Voting for the South-Rift Matatu Awards 2024 will take place immediately after nominations are complete.</li>
+        </ul>
         {{-- button --}}
         <a  onclick=showcategories() class="btn btn-primary w-100">Start</a>
     </div>
