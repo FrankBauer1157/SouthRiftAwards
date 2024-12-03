@@ -136,6 +136,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="responseModalLabel">Nomination Status</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <input type="text" name="phone" style="display:none;">
             </div>
             <div class="modal-body">
                 <!-- Image to display based on success/failure -->
