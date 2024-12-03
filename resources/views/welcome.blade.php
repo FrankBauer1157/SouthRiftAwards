@@ -111,8 +111,7 @@
                                                 South Rift Matatu Awards is a prestigious event where South Rift residents and businesses compete to win cash prizes, certificates, and other awards.
                                             </p>
 
-                                            <a href="https://southriftmatatuawards.co.ke/nomination" class="font-medium text-white text-sm/relaxed hover:text-black/70">Nominate Now</a>
-                                        </div>
+                                           </div>
                                         {{-- nominate now button --}}
 
                                     </div>
