@@ -21,7 +21,7 @@
                             <th>Nominated At</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="table-group-divider">
                         @foreach ($category->nominations as $index => $nominee)
                         <tr>
                             <td>{{ $index + 1 }}</td>
