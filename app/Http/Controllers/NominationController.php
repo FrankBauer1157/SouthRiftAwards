@@ -72,21 +72,21 @@ public function store(Request $request)
     if ($exists) {
         return response()->json([
             'success' => false,
-            'message' => 'You have already nominated in this category.'
+            'message' => 'You have already nominated in this category. Code:0'
         ], 200);
     }
 
     if (session()->has("nominated_category_{$request->category_id}")) {
         return response()->json([
             'success' => false,
-            'message' => 'You have already nominated in this category.'
+            'message' => 'You have already nominated in this category. Code:1'
         ], 200);
     }
 
     if (request()->cookie("nominated_category_{$request->category_id}")) {
         return response()->json([
             'success' => false,
-            'message' => 'You have already nominated in this category.'
+            'message' => 'You have already nominated in this category. Code:2'
         ], 200);
     }
 
