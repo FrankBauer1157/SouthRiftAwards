@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <h1 class="mb-4 text-center">Nominated Contestants</h1>
+    <h3 class="mb-4 text-center">SOUTH-RIFT MATATU AWARDS - 2024</h3>
 
     @foreach ($categories as $category)
     <div class="mb-5">
