@@ -38,6 +38,15 @@ class NominationController extends Controller
         return view('nomination.create', compact('categories'));
     }
 
+    public function getAvailableCategories(Request $request)
+    {
+        $nominatedCategoryIds = Nomination::where('ip_address', $request->ip())
+            ->pluck('category_id'); // Fetch categories already nominated by this IP
+
+        $categories = Category::whereNotIn('id', $nominatedCategoryIds)->get();
+
+        return response()->json($categories);
+    }
 
 
 public function store(Request $request)

@@ -105,10 +105,8 @@
                 <label for="category" class="form-label">Category</label>
                 <select name="category_id" id="category" class="form-select" required>
                     <option value="">-- Select a Category --</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
                 </select>
+                <label for="category" class="form-label">Category</label>
             </div>
 
             <div class="mb-3">
@@ -158,6 +156,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+
+    loadcategories()
+
+
     const form = document.getElementById('nominationForm');
     const responseModal = new bootstrap.Modal(document.getElementById('responseModal'));
     const responseMessage = document.getElementById('responseMessage');
@@ -191,6 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             responseModal.show();
+            loadcategories()
 
             // Reset the form only if the submission is successful
             if (data.success) {
@@ -208,6 +211,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+
+
+
 //showcategories onclick
 function showcategories() {
     const categories = document.getElementById('categories');
@@ -221,6 +229,31 @@ function showcategories() {
         info.style.display = 'block';
     }
 }
+
+function loadcategories() {
+    const categorySelect = document.getElementById('category');
+
+        // Fetch categories based on IP check
+        fetch('/categories/check')
+            .then(response => response.json())
+            .then(data => {
+                // Clear existing options
+                categorySelect.innerHTML = '<option value="">-- Select a Category --</option>';
+
+                // Add fetched categories to the select dropdown
+                data.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category.id;
+                    option.textContent = category.name;
+                    categorySelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching categories:', error));
+
+
+}
+
+
 
 </script>
 
