@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
         <title>SRMA-2024</title>
+
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -176,6 +178,7 @@
                     </main>
 
                     <footer class="py-16 text-sm text-center text-black dark:text-white/70">
+                        <h3>Patron: Kenda Vin</h3><br>
                        Developed by: Frank Bauer, 2024.
                     </footer>
                 </div>
