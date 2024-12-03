@@ -89,12 +89,11 @@
     <div id="info" class="col-md-4">
         <img src="{{ asset('success.png') }}" alt="Nominate" class="img-fluid">
         {{-- <p class="text-muted">Submit your nomination for the South-Rift Matatu Awards 2024.</p> --}}
-        <ul>
-            <li class="text-muted">Please note that all nominations will be reviewed by the judges and may be subject to change.</li>
-            <li class="text-muted">Please provide accurate and relevant information.</li>
-            <!-- once the nomination is complete, awardee shall be listed and election shall be held. -->
-            <li class="text-muted">Please note, this is the nomination phase. Voting for the South-Rift Matatu Awards 2024 will take place immediately after nominations are complete.</li>
-        </ul>
+        <p class="text-muted">Please note that all nominations will be reviewed by the judges and may be subject to change.</p>
+        <p class="text-muted">Please provide accurate and relevant information.</p>
+        <!-- once the nomination is complete, awardee shall be listed and election shall be held. -->
+        <p class="text-muted">Please note, this is the nomination phase. Voting for the South-Rift Matatu Awards 2024 will take place immediately after nominations are complete.</p>
+
         {{-- button --}}
         <a  onclick=showcategories() class="btn btn-primary w-100">Start</a>
     </div>
@@ -106,10 +105,10 @@
                 <label for="category" class="form-label">Category</label>
                 <select name="category_id" id="category" class="form-select" required>
                     <option value="">-- Select a Category --</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
                 </select>
+
+                <label><b>Note:</b> The categories you have nominated for will not appear here.</label>
+
             </div>
 
             <div class="mb-3">
@@ -125,11 +124,16 @@
             <button type="submit" class="btn btn-primary w-100">Submit Nomination</button>
         </form>
     </div>
+    <div id="done" class="col-md-4">
+        <img src="{{ asset('success.png') }}" alt="Nominate" class="img-fluid">
+        <h4>Done! It appears that you have completed the nomination process. Thank you for participating.</h4>
+
+    </div>
 </div>
     </div>
 
     <!-- Modal -->
- <!-- Modal -->
+<!-- Modal -->
 <!-- Modal -->
 <div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -137,6 +141,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="responseModalLabel">Nomination Status</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <input type="text" name="phone" style="display:none;">
             </div>
             <div class="modal-body">
                 <!-- Image to display based on success/failure -->
@@ -158,6 +163,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+
+    loadcategories()
+
+
     const form = document.getElementById('nominationForm');
     const responseModal = new bootstrap.Modal(document.getElementById('responseModal'));
     const responseMessage = document.getElementById('responseMessage');
@@ -191,6 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             responseModal.show();
+            loadcategories()
 
             // Reset the form only if the submission is successful
             if (data.success) {
@@ -208,6 +218,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+
+
+
 //showcategories onclick
 function showcategories() {
     const categories = document.getElementById('categories');
@@ -222,5 +237,58 @@ function showcategories() {
     }
 }
 
-</script>
+function loadcategories() {
+    const categorySelect = document.getElementById('category');
 
+        // Fetch categories based on IP check
+        fetch('/categories/check')
+    .then(response => response.json())
+    .then(data => {
+        // Clear existing options
+        const categorySelect = document.getElementById('category');
+        categorySelect.innerHTML = '<option value="">-- Select a Category --</option>';
+
+        if (data.length === 0) {
+            // If no categories are returned, call the done() function
+            done();
+        } else {
+            undone();
+            // Add fetche;d categories to the select dropdown
+            data.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                categorySelect.appendChild(option);
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching categories:', error);
+        // Optional: Handle errors if needed
+    });
+
+
+
+}
+
+function done() {
+    const done = document.getElementById('done');
+    const info = document.getElementById('info');
+    const categories = document.getElementById('categories');
+  info.style.display = 'none';
+  categories.style.display = 'none';
+  done.style.display = 'block';
+}
+
+function undone() {
+    const done = document.getElementById('done');
+    const info = document.getElementById('info');
+    const categories = document.getElementById('categories');
+//   info.style.display = 'block';
+//   categories.style.display = 'block';
+  done.style.display = 'none';
+}
+
+
+
+</script>
