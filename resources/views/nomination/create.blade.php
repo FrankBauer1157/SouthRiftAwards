@@ -106,7 +106,9 @@
                 <select name="category_id" id="category" class="form-select" required>
                     <option value="">-- Select a Category --</option>
                 </select>
-                <label for="category" class="form-label">Category</label>
+
+                <label><b>Note:</b> The categories you have nominated for will not appear here.</label>
+
             </div>
 
             <div class="mb-3">
@@ -121,6 +123,11 @@
 
             <button type="submit" class="btn btn-primary w-100">Submit Nomination</button>
         </form>
+    </div>
+    <div id="done" class="col-md-4">
+        <img src="{{ asset('success.png') }}" alt="Nominate" class="img-fluid">
+        <h4>Done! It appears that you have completed the nomination process. Thank you for participating.</h4>
+
     </div>
 </div>
     </div>
@@ -235,22 +242,51 @@ function loadcategories() {
 
         // Fetch categories based on IP check
         fetch('/categories/check')
-            .then(response => response.json())
-            .then(data => {
-                // Clear existing options
-                categorySelect.innerHTML = '<option value="">-- Select a Category --</option>';
+    .then(response => response.json())
+    .then(data => {
+        // Clear existing options
+        const categorySelect = document.getElementById('category');
+        categorySelect.innerHTML = '<option value="">-- Select a Category --</option>';
 
-                // Add fetched categories to the select dropdown
-                data.forEach(category => {
-                    const option = document.createElement('option');
-                    option.value = category.id;
-                    option.textContent = category.name;
-                    categorySelect.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Error fetching categories:', error));
+        if (data.length === 0) {
+            // If no categories are returned, call the done() function
+            done();
+        } else {
+            undone();
+            // Add fetche;d categories to the select dropdown
+            data.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                categorySelect.appendChild(option);
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching categories:', error);
+        // Optional: Handle errors if needed
+    });
 
 
+
+}
+
+function done() {
+    const done = document.getElementById('done');
+    const info = document.getElementById('info');
+    const categories = document.getElementById('categories');
+  info.style.display = 'none';
+  categories.style.display = 'none';
+  done.style.display = 'block';
+}
+
+function undone() {
+    const done = document.getElementById('done');
+    const info = document.getElementById('info');
+    const categories = document.getElementById('categories');
+//   info.style.display = 'block';
+//   categories.style.display = 'block';
+  done.style.display = 'none';
 }
 
 
