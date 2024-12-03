@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>SRMA-2024</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -156,7 +156,7 @@
                                     </svg>
                                 </div>
 
-                                <div class="pt-3 sm:pt-5">
+                                <div class="pt-2 sm:pt-5">
                                     <h2 class="text-xl font-semibold text-black dark:text-white">Vibrant Ecosystem</h2>
 
                                     <p class="mt-4 text-sm/relaxed">
@@ -168,7 +168,7 @@
                     </main>
 
                     <footer class="py-16 text-sm text-center text-black dark:text-white/70">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+                       Developed by: Frank Bauer, 2024.
                     </footer>
                 </div>
             </div>
