@@ -94,11 +94,12 @@
                                         </div>
 
                                         <div class="pt-3 sm:pt-5 lg:pt-0">
-                                            <h2 class="text-xl font-semibold text-black dark:text-white">Documentation</h2>
-
-                                            <p class="mt-4 text-sm/relaxed">
-                                                Laravel has wonderful documentation covering every aspect of the framework. Whether you are a newcomer or have prior experience with Laravel, we recommend reading our documentation from beginning to end.
+                                            <h2 class="text-xl font-semibold text-black dark:text-white">South Rift Matatu Awards - 2024</h2>
+                                            <p class="text-sm/relaxed">
+                                                South Rift Matatu Awards is a prestigious event where South Rift residents and businesses compete to win cash prizes, certificates, and other awards.
                                             </p>
+
+                                          
                                         </div>
                                     </div>
 
