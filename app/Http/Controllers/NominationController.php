@@ -38,38 +38,9 @@ class NominationController extends Controller
         return view('nomination.create', compact('categories'));
     }
 
-    public function storex(Request $request)
-    {
-        $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'name' => 'required|string|max:255',
-            'reason' => 'required|string|max:1000',
-        ]);
 
-        $ipAddress = $request->ip(); // or '127.0.0.1' for testing locally
 
-        // Fetch location data (if you installed the `stevebauman/location` package)
-        $location = Location::get($ipAddress);
-
-        // Save the nomination
-        Nomination::create([
-            'category_id' => $request->category_id,
-            'name' => $request->name,
-            'reason' => $request->reason,
-            'ip_address' => $ipAddress,
-            'user_agent' => $request->header('User-Agent'),
-            'location' => $location ? json_encode([
-                'country' => $location->countryName,
-                'region' => $location->regionName,
-                'city' => $location->cityName,
-            ]) : null,
-        ]);
-     //   dd(nomination::all());
-
-        return redirect()->route('nomination.create')->with('success', 'Nomination submitted successfully!');
-    }
-
-    public function store(Request $request)
+public function store(Request $request)
 {
     $request->validate([
         'category_id' => 'required|exists:categories,id',
@@ -77,38 +48,36 @@ class NominationController extends Controller
         'reason' => 'required|string|max:1000',
     ]);
 
-
     // Prevent spamming: Check if the user has already nominated in this category from the same IP
     $exists = Nomination::where('category_id', $request->category_id)
         ->where('ip_address', $request->ip())
         ->exists();
 
     if ($exists) {
-        return back()->withErrors(['error' => 'You have already nominated in this category.']);
+        return response()->json([
+            'success' => false,
+            'message' => 'You have already nominated in this category.'
+        ], 200);
     }
 
-
-
-    $ip = $request->ip(); // Get IP address
-    // $response = Http::get("http://ip-api.com/json/{$ip}"); // Fetch geolocation data
-    // $location = $response->successful() ?
-    //     $response->json('city') . ', ' . $response->json('country') :
-    //     'Unknown'; // Handle failure gracefully
-
-        $location = 'Bomet'; //geoip()->getLocation('41.90.4.236');
-// $city = $location['city'];
-// $country = $location['country'];
-
-//dd($location);
+    // Use the user's IP and geolocation (for now using a hardcoded value)
+    $ip = $request->ip();
+    $location = 'Bomet'; // Replace this with real geolocation logic if needed
 
     Nomination::create([
         'category_id' => $request->category_id,
         'name' => $request->name,
         'reason' => $request->reason,
-        'ip_address' => $ip, // Save IP
-        'location' => $location, // Save location
+        'ip_address' => $ip,
+        'location' => $location,
     ]);
 
-    return redirect()->route('nomination.create')->with('success', 'Nomination submitted successfully, go to the next category.');
+    return response()->json([
+        'success' => true,
+        'message' => 'Nomination submitted successfully! Please proceed to the next category.'
+    ], 200);
 }
+
+
+
 }
