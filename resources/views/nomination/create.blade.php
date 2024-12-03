@@ -2,7 +2,7 @@
 
 <style>
     .col-md-4 {
-    text-align: center;
+  /* //  text-align: center; */
     padding: 20px;
     background-color: #f9f9f9; /* Light background for contrast */
     border-radius: 8px; /* Soft rounded corners */
@@ -88,7 +88,7 @@
     </div>
     <div id="info" class="col-md-4">
         <img src="{{ asset('success.png') }}" alt="Nominate" class="img-fluid">
-        <p class="text-muted">Submit your nomination for the South-Rift Matatu Awards 2024.</p>
+        {{-- <p class="text-muted">Submit your nomination for the South-Rift Matatu Awards 2024.</p> --}}
         <p class="text-muted">Please note that all nominations will be reviewed by the judges and may be subject to change.</p>
         <p class="text-muted">Please provide accurate and relevant information.</p>
         <!-- once the nomination is complete, awardee shall be listed and election shall be held. -->
