@@ -20,7 +20,52 @@
         </div>
     @endforeach
 </div>
-
+<div class="p-6 rounded-lg shadow-lg bg-background text-primary-foreground">
+    <div class="mb-4 border-b border-border">
+        <nav class="flex space-x-2">
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 rounded-lg border-primary focus:outline-none bg-primary text-primary-foreground hover:bg-primary/80">Tab 1</button>
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 border-transparent rounded-lg focus:outline-none hover:border-primary hover:bg-accent hover:text-accent-foreground">Tab 2</button>
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 border-transparent rounded-lg focus:outline-none hover:border-primary hover:bg-accent hover:text-accent-foreground">Tab 3</button>
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 border-transparent rounded-lg focus:outline-none hover:border-primary hover:bg-accent hover:text-accent-foreground">Tab 4</button>
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 border-transparent rounded-lg focus:outline-none hover:border-primary hover:bg-accent hover:text-accent-foreground">Tab 5</button>
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 border-transparent rounded-lg focus:outline-none hover:border-primary hover:bg-accent hover:text-accent-foreground">Tab 6</button>
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 border-transparent rounded-lg focus:outline-none hover:border-primary hover:bg-accent hover:text-accent-foreground">Tab 7</button>
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 border-transparent rounded-lg focus:outline-none hover:border-primary hover:bg-accent hover:text-accent-foreground">Tab 8</button>
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 border-transparent rounded-lg focus:outline-none hover:border-primary hover:bg-accent hover:text-accent-foreground">Tab 9</button>
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 border-transparent rounded-lg focus:outline-none hover:border-primary hover:bg-accent hover:text-accent-foreground">Tab 10</button>
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 border-transparent rounded-lg focus:outline-none hover:border-primary hover:bg-accent hover:text-accent-foreground">Tab 11</button>
+            <button class="w-1/12 px-4 py-2 text-center transition border-b-2 border-transparent rounded-lg focus:outline-none hover:border-primary hover:bg-accent hover:text-accent-foreground">Tab 12</button>
+        </nav>
+    </div>
+    <div class="py-4">
+        <table class="w-full rounded-lg shadow-md bg-card">
+            <thead>
+                <tr class="bg-muted text-muted-foreground">
+                    <th class="p-3 text-left border-b border-border">Header 1</th>
+                    <th class="p-3 text-left border-b border-border">Header 2</th>
+                    <th class="p-3 text-left border-b border-border">Header 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="transition hover:bg-muted/50">
+                    <td class="p-3 border-b border-border">Data 1</td>
+                    <td class="p-3 border-b border-border">Data 2</td>
+                    <td class="p-3 border-b border-border">Data 3</td>
+                </tr>
+                <tr class="transition hover:bg-muted/50">
+                    <td class="p-3 border-b border-border">Data 4</td>
+                    <td class="p-3 border-b border-border">Data 5</td>
+                    <td class="p-3 border-b border-border">Data 6</td>
+                </tr>
+                <tr class="transition hover:bg-muted/50">
+                    <td class="p-3 border-b border-border">Data 7</td>
+                    <td class="p-3 border-b border-border">Data 8</td>
+                    <td class="p-3 border-b border-border">Data 9</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {{-- <table class="min-w-full mt-8 overflow-hidden rounded-lg shadow-lg bg-card text-card-foreground">
     <thead class="bg-primary text-primary-foreground">
