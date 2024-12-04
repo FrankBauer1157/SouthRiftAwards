@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\NominationController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', function () {
@@ -39,10 +40,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Public routes
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
+    
 Route::get('/nomination', [NominationController::class, 'create'])->name('nomination.create'); // Public nomination form
 Route::post('/nomination', [NominationController::class, 'store'])->name('nomination.store');
 Route::get('/vote', [\App\Http\Controllers\VoteController::class, 'index'])->name('vote.index'); // Public voting page

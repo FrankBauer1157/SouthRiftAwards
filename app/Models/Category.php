@@ -13,6 +13,7 @@ class Category extends Model
     public function nominations()
 {
     return $this->hasMany(related: Nomination::class);
+    
 }
 
 }
