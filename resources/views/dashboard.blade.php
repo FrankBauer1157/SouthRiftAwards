@@ -15,6 +15,7 @@
         </div>
         <p class="text-lg font-semibold">15%</p>
     </div>
+    
     <div class="flex items-center justify-between p-4 text-white transition duration-300 bg-yellow-500 rounded-lg shadow-md hover:bg-yellow-600">
         <div>
             <h2 class="mb-2 text-xl font-semibold">Category C</h2>
