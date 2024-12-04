@@ -23,6 +23,7 @@
 
 
 
+
 {{-- <table class="min-w-full mt-8 overflow-hidden rounded-lg shadow-lg bg-card text-card-foreground">
     <thead class="bg-primary text-primary-foreground">
         <tr>
