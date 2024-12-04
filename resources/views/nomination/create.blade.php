@@ -149,6 +149,7 @@
                 <div id="responseMessage" class="alert" style="display: block;"></div> <!-- This will display the message -->
             </div>
             <div class="modal-footer">
+                <label>Patron: Kenda Vin</label>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
@@ -239,6 +240,59 @@ function showcategories() {
 
 function loadcategories() {
     const categorySelect = document.getElementById('category');
+
+        // Fetch categories based on IP check
+        fetch('/categories/check')
+    .then(response => response.json())
+    .then(data => {
+        // Clear existing options
+        const categorySelect = document.getElementById('category');
+        categorySelect.innerHTML = '<option value="">-- Select a Category --</option>';
+
+        if (data.length === 0) {
+            // If no categories are returned, call the done() function
+            done();
+        } else {
+            undone();
+            // Add fetche;d categories to the select dropdown
+            data.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                categorySelect.appendChild(option);
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching categories:', error);
+        // Optional: Handle errors if needed
+    });
+
+
+
+}
+
+function done() {
+    const done = document.getElementById('done');
+    const info = document.getElementById('info');
+    const categories = document.getElementById('categories');
+  info.style.display = 'none';
+  categories.style.display = 'none';
+  done.style.display = 'block';
+}
+
+function undone() {
+    const done = document.getElementById('done');
+    const info = document.getElementById('info');
+    const categories = document.getElementById('categories');
+//   info.style.display = 'block';
+//   categories.style.display = 'block';
+  done.style.display = 'none';
+}
+
+
+
+</script>
 
         // Fetch categories based on IP check
         fetch('/categories/check')

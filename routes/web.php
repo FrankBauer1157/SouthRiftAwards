@@ -47,6 +47,7 @@ Route::get('/nomination', [NominationController::class, 'create'])->name('nomina
 Route::post('/nomination', [NominationController::class, 'store'])->name('nomination.store');
 Route::get('/vote', [\App\Http\Controllers\VoteController::class, 'index'])->name('vote.index'); // Public voting page
 Route::post('/vote', [\App\Http\Controllers\VoteController::class, 'submit'])->name('vote.submit');
+Route::get('/categories/check', [NominationController::class, 'getAvailableCategories']);
 
 
 Auth::routes();
