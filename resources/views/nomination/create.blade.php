@@ -292,56 +292,27 @@ function undone() {
 
 
 
-</script>
-
-        // Fetch categories based on IP check
-        fetch('/categories/check')
-    .then(response => response.json())
-    .then(data => {
-        // Clear existing options
-        const categorySelect = document.getElementById('category');
-        categorySelect.innerHTML = '<option value="">-- Select a Category --</option>';
-
-        if (data.length === 0) {
-            // If no categories are returned, call the done() function
-            done();
-        } else {
-            undone();
-            // Add fetche;d categories to the select dropdown
-            data.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category.id;
-                option.textContent = category.name;
-                categorySelect.appendChild(option);
-            });
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching categories:', error);
-        // Optional: Handle errors if needed
-    });
 
 
 
-}
 
-function done() {
-    const done = document.getElementById('done');
-    const info = document.getElementById('info');
-    const categories = document.getElementById('categories');
-  info.style.display = 'none';
-  categories.style.display = 'none';
-  done.style.display = 'block';
-}
+// function done() {
+//     const done = document.getElementById('done');
+//     const info = document.getElementById('info');
+//     const categories = document.getElementById('categories');
+//   info.style.display = 'none';
+//   categories.style.display = 'none';
+//   done.style.display = 'block';
+// }
 
-function undone() {
-    const done = document.getElementById('done');
-    const info = document.getElementById('info');
-    const categories = document.getElementById('categories');
-//   info.style.display = 'block';
-//   categories.style.display = 'block';
-  done.style.display = 'none';
-}
+// function undone() {
+//     const done = document.getElementById('done');
+//     const info = document.getElementById('info');
+//     const categories = document.getElementById('categories');
+// //   info.style.display = 'block';
+// //   categories.style.display = 'block';
+//   done.style.display = 'none';
+// }
 
 
 
