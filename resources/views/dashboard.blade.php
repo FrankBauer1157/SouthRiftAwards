@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<div class="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
+{{-- <div class="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
     <div class="flex items-center justify-between p-4 text-white transition duration-300 bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">
         <div>
             <h2 class="mb-2 text-xl font-semibold">Category A</h2>
@@ -51,7 +51,27 @@
         </div>
         <p class="text-lg font-semibold">25%</p>
     </div>
+</div> --}}
+
+@php
+    // Define background colors
+    $bgColors = ['bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500', 'bg-purple-500', 'bg-orange-500', 'bg-teal-500'];
+@endphp
+
+<div class="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
+    @foreach($categories as $index => $category)
+        <div class="flex items-center justify-between p-4 text-white transition duration-300 {{ $bgColors[$index % count($bgColors)] }} rounded-lg shadow-md hover:{{ str_replace('-500', '-600', $bgColors[$index % count($bgColors)]) }}">
+            <div>
+                <h2 class="mb-2 text-xl font-semibold">{{ $category->name }}</h2>
+                <p class="text-3xl font-bold">{{ $category->nominations_count }}</p>
+            </div>
+            <p class="text-lg font-semibold">
+                {{ round(($category->nominations_count / $totalNominations) * 100, 2) }}%
+            </p>
+        </div>
+    @endforeach
 </div>
+
 
 <table class="min-w-full mt-8 overflow-hidden rounded-lg shadow-lg bg-card text-card-foreground">
     <thead class="bg-primary text-primary-foreground">
