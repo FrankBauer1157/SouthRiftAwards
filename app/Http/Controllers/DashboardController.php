@@ -9,6 +9,7 @@ class DashboardController extends Controller
     public function index()
     {
         $categories = Category::withCount('nominations')->get();
-        return view('dashboard', compact('categories'));
+        $totalNominations = $categories->sum('nominations_count');
+        return view('dashboard', compact('categories', 'totalNominations'));
     }
 }
