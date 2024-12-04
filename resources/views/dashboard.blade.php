@@ -1,57 +1,6 @@
 @extends('layouts.main')
 @section('content')
-{{-- <div class="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
-    <div class="flex items-center justify-between p-4 text-white transition duration-300 bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">
-        <div>
-            <h2 class="mb-2 text-xl font-semibold">Category A</h2>
-            <p class="text-3xl font-bold">245</p>
-        </div>
-        <p class="text-lg font-semibold">25%</p>
-    </div>
-    <div class="flex items-center justify-between p-4 text-white transition duration-300 bg-green-500 rounded-lg shadow-md hover:bg-green-600">
-        <div>
-            <h2 class="mb-2 text-xl font-semibold">Category B</h2>
-            <p class="text-3xl font-bold">180</p>
-        </div>
-        <p class="text-lg font-semibold">15%</p>
-    </div>
 
-    <div class="flex items-center justify-between p-4 text-white transition duration-300 bg-yellow-500 rounded-lg shadow-md hover:bg-yellow-600">
-        <div>
-            <h2 class="mb-2 text-xl font-semibold">Category C</h2>
-            <p class="text-3xl font-bold">320</p>
-        </div>
-        <p class="text-lg font-semibold">30%</p>
-    </div>
-    <div class="flex items-center justify-between p-4 text-white transition duration-300 bg-red-500 rounded-lg shadow-md hover:bg-red-600">
-        <div>
-            <h2 class="mb-2 text-xl font-semibold">Category D</h2>
-            <p class="text-3xl font-bold">90</p>
-        </div>
-        <p class="text-lg font-semibold">8%</p>
-    </div>
-    <div class="flex items-center justify-between p-4 text-white transition duration-300 bg-purple-500 rounded-lg shadow-md hover:bg-purple-600">
-        <div>
-            <h2 class="mb-2 text-xl font-semibold">Category E</h2>
-            <p class="text-3xl font-bold">410</p>
-        </div>
-        <p class="text-lg font-semibold">38%</p>
-    </div>
-    <div class="flex items-center justify-between p-4 text-white transition duration-300 bg-orange-500 rounded-lg shadow-md hover:bg-orange-600">
-        <div>
-            <h2 class="mb-2 text-xl font-semibold">Category F</h2>
-            <p class="text-3xl font-bold">140</p>
-        </div>
-        <p class="text-lg font-semibold">13%</p>
-    </div>
-    <div class="flex items-center justify-between p-4 text-white transition duration-300 bg-teal-500 rounded-lg shadow-md hover:bg-teal-600">
-        <div>
-            <h2 class="mb-2 text-xl font-semibold">Category G</h2>
-            <p class="text-3xl font-bold">270</p>
-        </div>
-        <p class="text-lg font-semibold">25%</p>
-    </div>
-</div> --}}
 
 @php
     // Define background colors
