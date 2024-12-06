@@ -98,16 +98,19 @@
   </head>
   <body>
     <div class="flex flex-col justify-between min-h-screen bg-background text-foreground">
-    <header class="py-8 text-center">
-        <h1 class="text-4xl font-bold text-primary">Our Valued Sponsors</h1>
-        <p class="mb-6 text-center text-muted-foreground">
-            We are grateful for the support of our sponsors who make this event possible.
-          </p>
-    </header>
+        <header class="py-3 text-center">
+            <h3 class="text-4xl font-bold text-primary">SOUTH-RIFT MATATU AWARDS - 2024</h3>
+            <p class="mb-8 text-lg text-center text-gray-600">
+                Nominations have ended. Thank you for participating! Please stay tuned—voting for the South-Rift Matatu Awards 2024 will begin soon."
+            </p>
+        </header>
     <main class="container py-8 mx-auto">
-        <p class="mb-8 text-lg text-center text-gray-600">
-            A heartfelt thank you to all our sponsors for their invaluable support and commitment to the success of the South-Rift Matatu Awards 2024!
-        </p>
+        <header class="py-8 text-center">
+            <h1 class="text-4xl font-bold text-primary">Our Valued Sponsors</h1>
+            <p class="mb-8 text-lg text-center text-gray-600">
+                A heartfelt thank you to all our sponsors for their invaluable support and commitment to the success of the South-Rift Matatu Awards 2024!
+            </p>
+        </header>
 
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             <div class="flex flex-col items-center">
@@ -143,7 +146,21 @@
                 <img src="{{ asset('SMRA/Triple Kay.png') }}" alt="Sponsor 1 Logo" class="object-contain w-32 h-32 mb-4">
 
             </div>
+            <div class="flex flex-col items-center">
+                <img src="{{ asset('SMRA/f2.jpeg') }}" alt="Sponsor 1 Logo" class="object-contain w-32 h-32 mb-4">
+
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="{{ asset('SMRA/fg.jpeg') }}" alt="Sponsor 1 Logo" class="object-contain w-32 h-32 mb-4">
+
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="{{ asset('SMRA/fgg.jpeg') }}" alt="Sponsor 1 Logo" class="object-contain w-32 h-32 mb-4">
+
+            </div>
+
         </div>
+
     </main>
     <footer class="py-4 text-center bg-card text-card-foreground">
         <p>Thank you to all our sponsors for their generous support!</p>
