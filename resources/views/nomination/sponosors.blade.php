@@ -163,7 +163,7 @@
 
     </main>
     <footer class="py-4 text-center bg-card text-card-foreground">
-        <p>Thank you to all our sponsors for their generous support!</p>
+        <p>Patron Kenda Vin.</p>
     </footer>
 </div>
 
