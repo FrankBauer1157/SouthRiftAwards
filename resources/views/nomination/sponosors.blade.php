@@ -100,6 +100,9 @@
     <div class="flex flex-col justify-between min-h-screen bg-background text-foreground">
     <header class="py-8 text-center">
         <h1 class="text-4xl font-bold text-primary">Our Valued Sponsors</h1>
+        <p class="mb-6 text-center text-muted-foreground">
+            We are grateful for the support of our sponsors who make this event possible.
+          </p>
     </header>
     <main class="container py-8 mx-auto">
         <p class="mb-8 text-lg text-center text-gray-600">
