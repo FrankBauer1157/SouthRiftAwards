@@ -35,7 +35,8 @@ class NominationController extends Controller
     public function create()
     {
         $categories = Category::all(); // Fetch categories
-        return view('nomination.create', compact('categories'));
+        return view('nomination.sponosors', compact('categories'));
+
     }
 
     public function getAvailableCategories(Request $request)
