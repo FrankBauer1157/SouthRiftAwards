@@ -101,7 +101,7 @@
         <header class="py-3 text-center">
             <h3 class="text-4xl font-bold text-primary">SOUTH-RIFT MATATU AWARDS - 2024</h3>
             <p class="mb-8 text-lg text-center text-gray-600">
-                Nominations have ended. Thank you for participating! Please stay tuned—voting for the South-Rift Matatu Awards 2024 will begin soon."
+                Nominations have ended. Thank you for participating! Please stay tuned—voting will begin in a short while."
             </p>
         </header>
     <main class="container py-8 mx-auto">
