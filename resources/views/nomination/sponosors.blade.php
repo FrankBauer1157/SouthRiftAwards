@@ -102,37 +102,43 @@
         <h1 class="text-4xl font-bold text-primary">Our Valued Sponsors</h1>
     </header>
     <main class="container py-8 mx-auto">
-        <p class="mb-8 text-lg text-center text-muted">Thank you to all our sponsors for their generous support!</p>
+        <p class="mb-8 text-lg text-center text-gray-600">
+            A heartfelt thank you to all our sponsors for their invaluable support and commitment to the success of the South-Rift Matatu Awards 2024!
+        </p>
+
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-
-            <div class="flex flex-col items-center justify-center p-4 transition duration-300 rounded-lg shadow-lg bg-secondary hover:bg-secondary/80">
-                <img src="SRMA/pumc.jpg" alt="Sponsor 1" class="object-contain w-32 h-32 mb-4">
-                <h2 class="mb-2 text-lg font-bold text-secondary-foreground">PUMC</h2>
-                <p class="text-center text-muted-foreground">Pkulel Univercity Meta Campus</p>
+            <div class="flex flex-col items-center">
+                <img src="{{ asset('SMRA/pumc.jpg') }}" alt="Sponsor 1 Logo" class="object-contain w-32 h-32 mb-4">
+                {{-- <h3 class="text-lg font-semibold text-gray-700">PUMC</h3> --}}
+                {{-- <p class="text-sm text-center text-gray-600">
+                    Proud sponsor of the South-Rift Matatu Awards 2024, supporting excellence and community growth.
+                </p> --}}
             </div>
 
-            <div class="flex flex-col items-center justify-center p-4 transition duration-300 rounded-lg shadow-lg bg-accent hover:bg-accent/80">
-                <img src="https://openui.fly.dev/openui/200x200.svg?text=Sponsor2" alt="Sponsor 2" class="object-contain w-32 h-32 mb-4">
-                <h2 class="mb-2 text-lg font-bold text-accent-foreground">Sponsor 2</h2>
-                <p class="text-center text-muted-foreground">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
 
-            <div class="flex flex-col items-center justify-center p-4 transition duration-300 rounded-lg shadow-lg bg-destructive hover:bg-destructive/80">
-                <img src="https://openui.fly.dev/openui/200x200.svg?text=Sponsor3" alt="Sponsor 3" class="object-contain w-32 h-32 mb-4">
-                <h2 class="mb-2 text-lg font-bold text-destructive-foreground">Sponsor 3</h2>
-                <p class="text-center text-muted-foreground">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
+            <div class="flex flex-col items-center">
+                <img src="{{ asset('SMRA/Eangle Nest.png') }}" alt="Sponsor 1 Logo" class="object-contain w-32 h-32 mb-4">
 
-            <div class="flex flex-col items-center justify-center p-4 transition duration-300 rounded-lg shadow-lg bg-muted hover:bg-muted/80">
-                <img src="https://openui.fly.dev/openui/200x200.svg?text=Sponsor4" alt="Sponsor 4" class="object-contain w-32 h-32 mb-4">
-                <h2 class="mb-2 text-lg font-bold text-muted-foreground">Sponsor 4</h2>
-                <p class="text-center text-muted-foreground">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
             </div>
+            <div class="flex flex-col items-center">
+                <img src="{{ asset('SMRA/1.jpg') }}" alt="Sponsor 1 Logo" class="object-contain w-32 h-32 mb-4">
 
-            <div class="flex flex-col items-center justify-center p-4 transition duration-300 rounded-lg shadow-lg bg-primary hover:bg-primary/80">
-                <img src="https://openui.fly.dev/openui/200x200.svg?text=Sponsor5" alt="Sponsor 5" class="object-contain w-32 h-32 mb-4">
-                <h2 class="mb-2 text-lg font-bold text-primary-foreground">Sponsor 5</h2>
-                <p class="text-center text-muted-foreground">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="{{ asset('SMRA/Media.jpg') }}" alt="Sponsor 1 Logo" class="object-contain w-32 h-32 mb-4">
+
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="{{ asset('SMRA/security.png') }}" alt="Sponsor 1 Logo" class="object-contain w-32 h-32 mb-4">
+
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="{{ asset('SMRA/swam.png') }}" alt="Sponsor 1 Logo" class="object-contain w-32 h-32 mb-4">
+
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="{{ asset('SMRA/Triple Kay.png') }}" alt="Sponsor 1 Logo" class="object-contain w-32 h-32 mb-4">
+
             </div>
         </div>
     </main>
