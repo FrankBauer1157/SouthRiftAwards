@@ -82,7 +82,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="container">
-            <h3 class="text-center">Nominate Your Favorite South-Rift Matatu Awardee</h3>
+            {{-- <h3 class="text-center">Nominate Your Favorite South-Rift Matatu Awardee</h3> --}}
             {{-- <p class="lead">Nominate someone you admire and believe in for the South-Rift Matatu Awards 2024.</p> --}}
         </div>
     </div>
@@ -126,7 +126,7 @@
     </div>
     <div id="done" class="col-md-4">
         <img src="{{ asset('success.png') }}" alt="Nominate" class="img-fluid">
-        <h4>Done! It appears that you have completed the nomination process. Thank you for participating.</h4>
+        <h4>Nominations have ended. Thank you for participating! Please stay tuned—voting for the South-Rift Matatu Awards 2024 will begin soon."</h4>
 
     </div>
 </div>
@@ -164,8 +164,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-
-    loadcategories()
+done()
+ //   loadcategories()
 
 
     const form = document.getElementById('nominationForm');
