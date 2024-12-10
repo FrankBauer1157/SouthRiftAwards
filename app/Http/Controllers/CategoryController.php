@@ -1,8 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
+
+
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Nomination;
+
 
 class CategoryController extends Controller
 {
@@ -18,7 +22,15 @@ class CategoryController extends Controller
     {
         return view('categories.create');
     }
+    public function getNominations($categoryId)
+{
+    $nominations = Nomination::select('name', DB::raw('COUNT(*) as count'))
+        ->where('category_id', $categoryId)
+        ->groupBy('name')
+        ->get();
 
+    return response()->json($nominations);
+}
     // Store a new category
     public function store(Request $request)
     {

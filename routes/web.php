@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/nominations/admin', [NominationController::class, 'adminView'])->name('nominations.admin'); // Admin view
-    Route::get('/nomination', [NominationController::class, 'create'])->name('nomination.create'); 
+    Route::get('/nomination', [NominationController::class, 'create'])->name('nomination.create');
 });
 
 // Public routes
@@ -51,6 +51,7 @@ Route::post('/nomination', [NominationController::class, 'store'])->name('nomina
 Route::get('/vote', [\App\Http\Controllers\VoteController::class, 'index'])->name('vote.index'); // Public voting page
 Route::post('/vote', [\App\Http\Controllers\VoteController::class, 'submit'])->name('vote.submit');
 Route::get('/categories/check', [NominationController::class, 'getAvailableCategories']);
+Route::get('/categories/{id}/nominations', [CategoryController::class, 'getNominations']);
 
 
 Auth::routes();
