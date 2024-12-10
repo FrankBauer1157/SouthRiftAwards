@@ -30,6 +30,22 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="categoryModalLabel">{{ $category->name }} - Nominations</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nominee</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($category->nominations as $nomination)
+                                    <tr>
+                                        <td>{{ $nomination->wkfld }}</td>
+                                        <td>Other details go here</td> <!-- Add any additional details here -->
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     <div class="modal-body">
                         @if ($category->nominations->isEmpty())
