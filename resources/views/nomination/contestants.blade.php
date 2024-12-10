@@ -19,7 +19,7 @@
 @section('content')
 <div class="container mx-auto">
     <div class="grid w-full grid-cols-1 gap-4 p-4 max-w-7xl sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
-        @foreach ($categories as $category)
+        @foreach ($categoriesWithNominations as $category)
         <div class="overflow-hidden text-white transition-transform transform bg-blue-500 rounded-lg shadow-lg hover:scale-105">
             <div class="p-4">
                 <h2 class="text-xl font-bold">{{ $category->name }}</h2>

@@ -46,6 +46,17 @@ class NominationController extends Controller
         return view('nomination.contestants', compact('categoriesWithNominations'));
     }
 
+    public function getNominations($categoryId)
+{
+    $nominations = Nomination::select('name', DB::raw('COUNT(*) as count'))
+        ->where('category_id', $categoryId)
+        ->groupBy('name')
+        ->get();
+
+    return response()->json($nominations);
+}
+
+
 
 
     public function getAvailableCategories(Request $request)
