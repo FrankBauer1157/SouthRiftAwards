@@ -34,22 +34,24 @@
                     @if ($category->nominations->isEmpty())
                         <p>No nominations yet.</p>
                     @else
-                        <table class="table table-striped">
-                            <thead>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nominee</th>
+                                <th>Count</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($category->nominations as $nomination)
                                 <tr>
-                                    <th>Nominee</th>
-                                    <th>Details</th>
+                                    <td>{{ $nomination->wkfld }}</td>
+                                    <td>{{ $nomination->nomination_count }}</td>
+                                    <td>Other details go here</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($category->nominations as $nomination)
-                                    <tr>
-                                        <td>{{ $nomination->wkfld }}</td>
-                                        <td>Other details go here</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                            @endforeach
+                        </tbody>
+                    </table>
                     @endif
                 </div>
                 <div class="modal-footer">
