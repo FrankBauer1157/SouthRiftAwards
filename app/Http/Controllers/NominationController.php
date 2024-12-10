@@ -43,7 +43,7 @@ class NominationController extends Controller
                                     $query->select('wkfld', 'category_id')->distinct();
                                 }])->get();
 
-        return view('nomination.contestants', compact('categoriesWithNominations'));
+        return view('nomination.contestants', compact('categoriesWithNominations','categories'));
     }
 
 
