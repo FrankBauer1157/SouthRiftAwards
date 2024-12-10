@@ -32,7 +32,7 @@ class NominationController extends Controller
         // $nominations = Nomination::with('category')->get(); // Fetch nominations with their categories
         // return view('nomination.index', compact('nominations'));
     }
-   
+
     public function create()
     {
         // Fetch categories with their nominations
