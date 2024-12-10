@@ -40,8 +40,12 @@ class NominationController extends Controller
 
         // Get distinct 'wkfld' values for each category
         $categoriesWithNominations = Category::with(['nominations' => function($query) {
-                                    $query->select('wkfld', 'category_id')->distinct();
-                                }])->get();
+            $query->select('wkfld', 'category_id')
+                  ->distinct()
+                  ->whereNotNull('wkfld') // Exclude NULL values
+                  ->where('wkfld', '!=', ''); // Exclude empty strings
+        }])->get();
+
 
         return view('nomination.contestants', compact('categoriesWithNominations','categories'));
     }
