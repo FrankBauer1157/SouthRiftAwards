@@ -99,7 +99,7 @@
   <body>
     <div class="flex flex-col justify-between min-h-screen bg-background text-foreground">
         <header class="py-3 text-center">
-            <h3 class="text-4xl font-bold text-primary">SOUTH-RIFT MATATU AWARDS - 2024</h3>
+            <h3 class="text-4xl font-bold text-primary">SRMA - 2024</h3>
             <p class="mb-8 text-lg text-center text-gray-600">
                 Nominations have ended. Thank you for participating! Please stay tuned—voting will begin in a short while."
             </p>

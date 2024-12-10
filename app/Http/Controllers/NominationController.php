@@ -34,8 +34,15 @@ class NominationController extends Controller
     }
     public function create()
     {
-        $categories = Category::all(); // Fetch categories
-        return view('nomination.sponosors', compact('categories'));
+        // $categories = Category::all(); // Fetch categories
+        // return view('nomination.conytestants', compact('categories'));
+
+        $categories = Category::with('nominations')->get(); // Fetch categories with nominations
+        $nominationsForCategory1 = Nomination::where('category_id', 1)
+                                    ->distinct()
+                                    ->pluck('wkfld');
+
+        return view('nomination.contestants', compact('categories', 'nominationsForCategory1'));
 
     }
 

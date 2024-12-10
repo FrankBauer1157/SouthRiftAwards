@@ -10,7 +10,7 @@ class Nomination extends Model
     use HasFactory;
 
     // protected $fillable = ['category_id', 'name', 'reason'];
-    protected $fillable = ['category_id', 'name', 'reason', 'ip_address', 'location','ip_address','user_agent'];
+    protected $fillable = ['category_id', 'name', 'reason', 'ip_address', 'location','ip_address','user_agent','wkfld'];
 
 
     public function category()
