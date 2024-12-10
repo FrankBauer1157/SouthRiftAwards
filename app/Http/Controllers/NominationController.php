@@ -32,7 +32,7 @@ class NominationController extends Controller
         // $nominations = Nomination::with('category')->get(); // Fetch nominations with their categories
         // return view('nomination.index', compact('nominations'));
     }
-    public function create()
+    public function createxx()
     {
         // $categories = Category::all(); // Fetch categories
         // return view('nomination.conytestants', compact('categories'));
@@ -45,6 +45,19 @@ class NominationController extends Controller
         return view('nomination.contestants', compact('categories', 'nominationsForCategory1'));
 
     }
+    public function create()
+{
+    // Fetch categories with their nominations
+    $categories = Category::with('nominations')->get();
+
+    // Get distinct 'wkfld' values for each category
+    $categoriesWithNominations = Category::with(['nominations' => function($query) {
+        $query->select('wkfld', 'category_id')->distinct();
+    }])->get();
+
+    return view('nomination.contestants', compact('categoriesWithNominations'));
+}
+
 
     public function getAvailableCategories(Request $request)
     {
