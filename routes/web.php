@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/nominations/admin', [NominationController::class, 'adminView'])->name('nominations.admin'); // Admin view
+    Route::get('/nomination', [NominationController::class, 'create'])->name('nomination.create'); 
 });
 
 // Public routes
@@ -44,8 +45,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
 
-    
-Route::get('/nomination', [NominationController::class, 'create'])->name('nomination.create'); // Public nomination form
+
+// Public nomination form
 Route::post('/nomination', [NominationController::class, 'store'])->name('nomination.store');
 Route::get('/vote', [\App\Http\Controllers\VoteController::class, 'index'])->name('vote.index'); // Public voting page
 Route::post('/vote', [\App\Http\Controllers\VoteController::class, 'submit'])->name('vote.submit');
