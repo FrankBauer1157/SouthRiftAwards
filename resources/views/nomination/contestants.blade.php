@@ -6,7 +6,7 @@
     <title>Matatu Awards Contestants</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
     <div class="grid w-full grid-cols-1 gap-4 p-4 max-w-7xl sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
