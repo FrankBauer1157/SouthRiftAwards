@@ -39,14 +39,14 @@
                     @if ($category->nominations->isEmpty())
                         <p class="text-gray-100">No nominations yet.</p>
                     @else
-                        @foreach ($category->nominations as $nomination)
+                        {{-- @foreach ($category->nominations as $nomination)
                         <div class="flex items-center justify-between py-2">
                             <span class="text-lg font-semibold">{{ $nomination->awardee_name }}</span>
                             <span class="px-3 py-1 text-{{ explode('-', $colorClass)[1] }}-500 bg-white rounded-full shadow">
                                 {{ $nomination->nominations_count }} Nominations
                             </span>
                         </div>
-                        @endforeach
+                        @endforeach --}}
                     @endif
                 @endif
             </div>
