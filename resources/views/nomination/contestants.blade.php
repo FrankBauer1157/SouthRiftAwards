@@ -39,7 +39,7 @@
                             <tr>
                                 <th>Nominee</th>
                                 <th>Count</th>
-                                <th>Details</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +47,7 @@
                                 <tr>
                                     <td>{{ $nomination->wkfld }}</td>
                                     <td>{{ $nomination->nomination_count }}</td>
-                                    <td>LISTED</td>
+                                    <td>LISTED FOR VOTING</td>
                                 </tr>
                             @endforeach
                         </tbody>
