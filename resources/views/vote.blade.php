@@ -119,36 +119,44 @@
 
       <button id="submit-vote" class="px-8 py-4 mt-10 text-xl font-semibold transition-colors duration-200 rounded-lg shadow-md bg-primary text-primary-foreground hover:bg-primary/80">Submit Vote</button>
     </div>
+<script>
+  document.getElementById('submit-vote').addEventListener('click', function() {
+    const categories = document.querySelectorAll('.category-group'); // Group wrapper for each category
+    const selectedContestants = [];
+    let allCategoriesValid = true;
 
-    <script>
-      document.getElementById('submit-vote').addEventListener('click', function() {
-        const selectedContestants = [];
-        document.querySelectorAll('input[name="contestants[]"]:checked').forEach(function(checkbox) {
-          selectedContestants.push(checkbox.value);
-        });
+    categories.forEach(category => {
+      const checkboxes = category.querySelectorAll('input[name="contestants[]"]:checked');
+      if (checkboxes.length === 0) {
+        allCategoriesValid = false;
+        const categoryName = category.querySelector('h2').textContent;
+        alert(`Please select at least one contestant for the category: ${categoryName}`);
+      } else {
+        checkboxes.forEach(checkbox => selectedContestants.push(checkbox.value));
+      }
+    });
 
-        if (selectedContestants.length > 0) {
-          fetch('{{ route('submit.vote') }}', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({ contestants: selectedContestants })
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.success) {
-              alert('Your vote has been submitted!');
-            } else {
-              alert('Something went wrong. Try again!');
-            }
-          });
+    if (allCategoriesValid && selectedContestants.length > 0) {
+      fetch('{{ route('submit.vote') }}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ contestants: selectedContestants })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Your vote has been submitted!');
         } else {
-          alert('Please select at least one contestant to vote for.');
+          alert('Something went wrong. Try again!');
         }
       });
-    </script>
+    }
+  });
+</script>
+
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
