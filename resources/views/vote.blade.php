@@ -100,7 +100,15 @@
 
    <body>
   <div class="flex flex-col items-center justify-center min-h-screen p-6 bg-background text-foreground">
-    <h2 class="mb-10 text-5xl font-extrabold text-center text-gradient">Vote for Your Favorite Contestants</h2>
+    {{-- <h2 class="mb-10 text-5xl font-extrabold text-center text-gradient">Vote for Your Favorite Contestants</h2> --}}
+    <h2 class="text-4xl font-bold" style="
+    background: linear-gradient(to right, #ff9800, #ffc107, #fdd835);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+">
+Vote for Your Favorite Contestants
+</h2>
     <div id="notification" class="notification" style="display: none;">
         <span id="notification-message"></span>
         <button id="notification-close" onclick="hideNotification()"></button>
@@ -138,21 +146,22 @@
         }
       </style>
 
-    <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
-      @foreach($categories as $category)
-      <div class="p-6 transition-transform transform rounded-lg shadow-lg category-group bg-card hover:scale-105 hover:shadow-2xl">
-          <h2 class="mb-6 text-3xl font-semibold text-primary">{{ $category->name }}</h2>
-          <div class="grid grid-cols-1 gap-4">
-              @foreach($category->contestants as $contestant)
-              <label class="flex items-center">
-                  <input type="radio" class="w-6 h-6 rounded form-radio text-primary border-primary focus:ring focus:ring-primary/50" name="contestants[{{ $category->id }}]" value="{{ $contestant->id }}">
-                  <span class="ml-3 text-lg font-medium">{{ $contestant->name }}</span>
-              </label>
-              @endforeach
-          </div>
-      </div>
-      @endforeach
+<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+    @foreach($categories as $category)
+    <div class="p-4 transition-transform transform rounded-lg shadow-lg category-group bg-card hover:scale-105 hover:shadow-2xl">
+        <h2 class="mb-4 text-xl font-semibold text-primary md:text-2xl">{{ $category->name }}</h2>
+        <div class="grid grid-cols-1 gap-3">
+            @foreach($category->contestants as $contestant)
+            <label class="flex items-center">
+                <input type="radio" class="w-5 h-5 rounded form-radio text-primary border-primary focus:ring focus:ring-primary/50" name="contestants[{{ $category->id }}]" value="{{ $contestant->id }}">
+                <span class="ml-2 text-sm font-medium md:text-base">{{ $contestant->name }}</span>
+            </label>
+            @endforeach
+        </div>
     </div>
+    @endforeach
+  </div>
+
 
     <button id="submit-vote" class="px-8 py-4 mt-10 text-xl font-semibold transition-colors duration-200 rounded-lg shadow-md bg-primary text-primary-foreground hover:bg-primary/80">Submit Vote</button>
   </div>
