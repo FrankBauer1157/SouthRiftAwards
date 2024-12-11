@@ -63,6 +63,8 @@ Route::post('/submit-vote', [VoteController::class, 'submitVote'])->name('submit
 
 
 
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
