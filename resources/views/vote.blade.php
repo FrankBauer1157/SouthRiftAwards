@@ -145,9 +145,12 @@ Vote for Your Favorite Contestants
           cursor: pointer;
         }
       </style>
- <div class="flex flex-col items-center bg-white rounded-lg shadow-md p-6sdf">
-    <img src="{{ asset('SMRA/brandname.png') }}" alt="PUMC Logo" class="object-contain w-24 h-24 mb-4 rounded-lg sm:w-32 sm:h-32">
-</div>
+<div class="flex flex-col items-center bg-white rounded-lg shadow-md p-6">
+    <img src="{{ asset('SMRA/brandname.png') }}"
+         alt="PUMC Logo"
+         class="object-contain w-48 h-48 mb-4 rounded-lg sm:w-64 sm:h-64">
+  </div>
+
 <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
     @foreach($categories as $category)
     <div class="p-4 transition-transform transform rounded-lg shadow-lg category-group bg-card hover:scale-105 hover:shadow-2xl">
