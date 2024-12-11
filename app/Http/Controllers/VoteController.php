@@ -216,7 +216,7 @@ public function submitVote(Request $request)
         Vote::create([
             'contestant_id' => $contestantId,
             'user_info_id' => $userInfo->id,
-            // 'category_id' => $category->id,
+             'category_id' => 0,
 
             // Assuming you have a relation
         ]);
