@@ -205,7 +205,7 @@ public function submitVote(Request $request)
 
     if ($userInfo) {
         // Use Laravel's session to store the message
-        session()->flash('message', 'You have already voted! Thank you for your participation.');
+        session()->flash('message', 'You have already voted! Please note that you can only vote once.Thank you for your participation.');
         return response()->json([
             'success' => false,
             'redirect' => route('sponsors'),
