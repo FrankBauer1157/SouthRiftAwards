@@ -171,7 +171,6 @@ Vote for Your Favorite Contestants
 
 <script>
 document.getElementById('submit-vote').addEventListener('click', function() {
-    console.log('Submit button clicked');
   const categories = document.querySelectorAll('.category-group');
   const selectedContestants = [];
   let allCategoriesValid = true;
@@ -188,8 +187,6 @@ document.getElementById('submit-vote').addEventListener('click', function() {
   });
 
   if (allCategoriesValid && selectedContestants.length > 0) {
-    console.log('Selected Contestants:', selectedContestants);
-
     fetch('{{ route('submit.vote') }}', {
       method: 'POST',
       headers: {
@@ -201,40 +198,32 @@ document.getElementById('submit-vote').addEventListener('click', function() {
     .then(response => {
       if (!response.ok) {
         return response.json().then(err => {
-          throw new Error(err.message || 'Something went wrong');
+          throw err; // Pass error object
         });
       }
       return response.json();
     })
     .then(data => {
-        
-      console.log('Response:', data);
       if (data.success) {
         showNotification('Your vote has been submitted!', 'success');
+      } else if (data.redirect) {
+        // Redirect the user if the response contains a redirect URL
+        window.location.href = data.redirect;
       } else {
         showNotification(data.message || 'Something went wrong. Try again!', 'error');
       }
     })
     .catch(error => {
       console.error('Error:', error);
-      showNotification('Error: ' + error.message || 'Unknown error occurred', 'error');
+      if (error.redirect) {
+        window.location.href = error.redirect; // Redirect if error contains redirect
+      } else {
+        showNotification('Error: ' + (error.message || 'Unknown error occurred'), 'error');
+      }
     });
   }
 
 
-  function showNotification(message, type = 'error') {
-  const notification = document.getElementById('notification');
-  const messageElement = document.getElementById('notification-message');
-
-  messageElement.textContent = message;
-  notification.className = `notification ${type}`; // Add the type class
-  notification.style.display = 'block';
-
-  // Auto-hide after 5 seconds
-  setTimeout(() => {
-    hideNotification();
-  }, 5000);
-}
 
 function hideNotification() {
   const notification = document.getElementById('notification');
