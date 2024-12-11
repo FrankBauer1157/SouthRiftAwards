@@ -201,11 +201,13 @@ public function submitVote(Request $request)
     if ($userInfo) {
         // return response()->json(['error' => 'You have already voted'], 400);
     }
-    
+
     // Store user info in voters_user_info table
     $userInfo = new VoteUserInfo;
     $userInfo->ip_address = $request->ip();
     $userInfo->mac_address = $request->ip();
+    $userInfo->userAgent = $request->userAgent();
+    $userInfo->user_id = 1;
     $userInfo->save();
 
     // Store votes in the votes table
