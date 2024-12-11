@@ -203,14 +203,14 @@ public function submitVote(Request $request)
         ->orWhere('mac_address', $request->mac_address)
         ->first();
 
-    // if ($userInfo) {
-    //     // Use Laravel's session to store the message
-    //     session()->flash('message', 'You have already voted! Thank you for your participation.');
-    //     return response()->json([
-    //         'success' => false,
-    //         'redirect' => route('sponsors'),
-    //     ], 400);
-    // }
+    if ($userInfo) {
+        // Use Laravel's session to store the message
+        session()->flash('message', 'You have already voted! Thank you for your participation.');
+        return response()->json([
+            'success' => false,
+            'redirect' => route('sponsors'),
+        ], 400);
+    }
 
     // Store user info in voters_user_info table
     $userInfo = new VoteUserInfo;
@@ -228,8 +228,13 @@ public function submitVote(Request $request)
             'category_id' => 0,
         ]);
     }
+    session()->flash('message', 'Thank you for perticipating in South-Rift Matatu Awards - 2024.');
+        return response()->json([
+            'success' => false,
+            'redirect' => route('sponsors'),
+        ], 400);
 
-    return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
+    // return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
 }
 
 
