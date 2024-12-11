@@ -223,15 +223,25 @@ document.getElementById('submit-vote').addEventListener('click', function() {
     });
   }
 
-  function shoNotification() {
-    const notification = document.getElementById('notification');
-    notification.style.display = 'block';
-  }
+  function showNotification(message, type = 'error') {
+  const notification = document.getElementById('notification');
+  const messageElement = document.getElementById('notification-message');
+
+  messageElement.textContent = message;
+  notification.className = `notification ${type}`; // Add the type class
+  notification.style.display = 'block';
+
+  // Auto-hide after 5 seconds
+  setTimeout(() => {
+    hideNotification();
+  }, 5000);
+}
 
 function hideNotification() {
   const notification = document.getElementById('notification');
   notification.style.display = 'none';
 }
+
 
 
 
