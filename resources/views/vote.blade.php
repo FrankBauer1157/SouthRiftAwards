@@ -101,14 +101,14 @@
    <body>
   <div class="flex flex-col items-center justify-center min-h-screen p-6 bg-background text-foreground">
     {{-- <h2 class="mb-10 text-5xl font-extrabold text-center text-gradient">Vote for Your Favorite Contestants</h2> --}}
-    <h2 class="text-4xl font-bold" style="
+    <h4 class="text-4xl font-bold" style="
     background: linear-gradient(to right, #ff9800, #ffc107, #fdd835);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 ">
 Vote for Your Favorite Contestants
-</h2>
+</h4>
     <div id="notification" class="notification" style="display: none;">
         <span id="notification-message"></span>
         <button id="notification-close" onclick="hideNotification()"></button>
@@ -145,7 +145,9 @@ Vote for Your Favorite Contestants
           cursor: pointer;
         }
       </style>
-
+ <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+    <img src="{{ asset('SMRA/bomet.jpeg') }}" alt="PUMC Logo" class="object-contain w-24 h-24 mb-4 rounded-lg sm:w-32 sm:h-32">
+</div>
 <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
     @foreach($categories as $category)
     <div class="p-4 transition-transform transform rounded-lg shadow-lg category-group bg-card hover:scale-105 hover:shadow-2xl">
