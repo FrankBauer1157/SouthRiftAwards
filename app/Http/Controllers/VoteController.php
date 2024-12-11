@@ -150,7 +150,7 @@ public function submitVoteccc(Request $request)
     return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
 }
 
-public function submitVote(Request $request)
+public function submitVoteeee(Request $request)
 {
     $validated = $request->validate([
         'contestants' => 'required|array',
@@ -191,6 +191,46 @@ public function submitVote(Request $request)
     return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
 }
 
+public function submitVote(Request $request)
+{
+    $validated = $request->validate([
+        'contestants' => 'required|array',
+        'contestants.*' => 'exists:contestants,id', // assuming contestants table
+    ]);
+
+    // Check if the user has already voted by IP/MAC address
+    $userInfo = VoteUserInfo::where('ip_address', $request->ip())
+        ->orWhere('mac_address', $request->mac_address)
+        ->first();
+
+    if ($userInfo) {
+        // Use Laravel's session to store the message
+        session()->flash('message', 'You have already voted! Thank you for your participation.');
+        return response()->json([
+            'success' => false,
+            'redirect' => route('sponsors'),
+        ], 400);
+    }
+
+    // Store user info in voters_user_info table
+    $userInfo = new VoteUserInfo;
+    $userInfo->ip_address = $request->ip();
+    $userInfo->mac_address = $request->ip(); // Assuming you store IP in place of MAC
+    $userInfo->user_Agent = $request->userAgent();
+    $userInfo->user_id = 1;
+    $userInfo->save();
+
+    // Store votes in the votes table
+    foreach ($request->contestants as $contestantId) {
+        Vote::create([
+            'contestant_id' => $contestantId,
+            'user_info_id' => $userInfo->id,
+            'category_id' => 0,
+        ]);
+    }
+
+    return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
+}
 
 
 

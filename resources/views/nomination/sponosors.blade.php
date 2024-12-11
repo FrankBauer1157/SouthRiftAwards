@@ -27,7 +27,11 @@
                 SOUTH-RIFT MATATU AWARDS - 2024
             </h3>
             <p class="mt-4 text-lg text-gray-200">
-               Thank you for perticipating in SRMA-AWARDS -2024.
+                @if(session('message'))
+                <div class="alert alert-info">
+                  {{ session('message') }}
+                </div>
+              @endif
             </p>
         </header>
 
