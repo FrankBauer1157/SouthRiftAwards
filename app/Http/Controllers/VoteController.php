@@ -154,8 +154,8 @@ public function submitVote(Request $request)
         $existingVote = VoteUserInfo::where('ip_address', $ipAddress)
                                     ->where('user_agent', $userAgent)
                                     ->where('mac_address', $macAddress)
-                                    ->where('category_id', $request->category_id) // Ensure category_id is available
-                                    ->where('contestant_id', $contestantId)
+                                    // ->where('category_id', $request->category_id) // Ensure category_id is available
+                                    ->where('contestant_id', operator: $contestantId)
                                     ->exists();
 
         if ($existingVote) {
@@ -173,7 +173,7 @@ public function submitVote(Request $request)
             'ip_address' => $ipAddress,
             'user_agent' => $userAgent,
             'mac_address' => $macAddress,
-            'category_id' => $request->category_id, // Ensure category_id is available
+            // 'category_id' => $request->category_id, // Ensure category_id is available
             'contestant_id' => $contestantId,
             'vote_time' => now(),
         ]);
