@@ -40,9 +40,9 @@ class VoteController extends Controller
 
         if ($existingVote) {
             // If a vote already exists, reject the request
-            return response()->json([
-                'message' => 'You have already voted for this nominee.',
-            ], 403);  // HTTP Status 403 Forbidden
+            // return response()->json([
+            //     'message' => 'You have already voted for this nominee.',
+            // ], 403);  // HTTP Status 403 Forbidden
         }
 
         // If validation passes and no previous vote is found, store the vote
