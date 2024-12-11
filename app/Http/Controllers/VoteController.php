@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vote;
 use App\Models\Nominee;
+use App\Models\VoteUserInfo;
 use App\Models\Category;
 
 use Illuminate\Support\Facades\Validator;
@@ -112,7 +113,7 @@ public function submitVotex(Request $request)
 
     return redirect()->route('vote.form')->with('success', 'Your vote has been cast!');
 }
-public function submitVote(Request $request)
+public function submitVote1(Request $request)
 {
     $contestantIds = $request->input('contestants');
 
@@ -130,6 +131,58 @@ public function submitVote(Request $request)
     }
 
     return response()->json(['success' => true]);
+}
+public function submitVote(Request $request)
+{
+    $request->validate([
+        'contestants' => 'required|array|min:1', // Ensure at least one contestant is selected
+        'contestants.*' => 'exists:contestants,id' // Validate that the contestant IDs are valid
+    ]);
+
+    // Get the current user's info (if available)
+    $user = auth()->user(); // You can use $user = auth()->user() for logged-in users, or null for guest users.
+
+    // Retrieve user IP, user agent, and MAC address (if available)
+    $ipAddress = $request->ip();
+    $userAgent = $request->header('User-Agent');
+    $macAddress = $request->header('X-Mac-Address'); // Assume you send MAC address via headers, if possible
+
+    $votes = $request->input('contestants');
+
+    foreach ($votes as $contestantId) {
+        // Check if this user has already voted for this category and contestant
+        $existingVote = VoteUserInfo::where('ip_address', $ipAddress)
+                                    ->where('user_agent', $userAgent)
+                                    ->where('mac_address', $macAddress)
+                                    ->where('category_id', $request->category_id) // Ensure category_id is available
+                                    ->where('contestant_id', $contestantId)
+                                    ->exists();
+
+        if ($existingVote) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You have already voted for this contestant in this category from this device.'
+            ], 400);
+        }
+    }
+
+    // Proceed with storing the votes if no duplicates
+    foreach ($votes as $contestantId) {
+        VoteUserInfo::create([
+            'user_id' => $user ? $user->id : null, // Store user_id if logged in, else null
+            'ip_address' => $ipAddress,
+            'user_agent' => $userAgent,
+            'mac_address' => $macAddress,
+            'category_id' => $request->category_id, // Ensure category_id is available
+            'contestant_id' => $contestantId,
+            'vote_time' => now(),
+        ]);
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Your vote has been successfully submitted!'
+    ]);
 }
 
 
