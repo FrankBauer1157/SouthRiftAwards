@@ -124,59 +124,57 @@
 </body>
 
 <script>
-  document.getElementById('submit-vote').addEventListener('click', function() {
-    console.log('Submit button clicked');
-    const categories = document.querySelectorAll('.category-group');
-    const selectedContestants = [];
-    let allCategoriesValid = true;
+document.getElementById('submit-vote').addEventListener('click', function() {
+  console.log('Submit button clicked');
+  const categories = document.querySelectorAll('.category-group');
+  const selectedContestants = [];
+  let allCategoriesValid = true;
 
-    categories.forEach(category => {
-      const selectedRadio = category.querySelector('input[type="radio"]:checked');
-      if (!selectedRadio) {
-        allCategoriesValid = false;
-        const categoryName = category.querySelector('h2').textContent;
-        alert(`Please select a contestant for the category: ${categoryName}`);
-      } else {
-        selectedContestants.push(selectedRadio.value);
-      }
-    });
-
-    if (allCategoriesValid && selectedContestants.length > 0) {
-      console.log('Selected Contestants:', selectedContestants);
-
-      fetch('{{ route('submit.vote') }}', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify({ contestants: selectedContestants })
-      })
-      .then(response => {
-  if (!response.ok) {
-    // If response status is not OK, throw an error with the status code
-    throw new Error('Something went wrong: ' + response.statusText);
-  }
-  return response.json();
-})
-.then(data => {
-  console.log('Response:', data);
-  if (data.success) {
-    alert('Your vote has been submitted!');
-  } else {
-    // Show the specific error message from the server
-    alert(data.message || 'Something went wrong. Try again!');
-  }
-})
-.catch(error => {
-  console.error('Error:', error);
-  alert('Error: ' + error.message);
-});
-
-
-
+  categories.forEach(category => {
+    const selectedRadio = category.querySelector('input[type="radio"]:checked');
+    if (!selectedRadio) {
+      allCategoriesValid = false;
+      const categoryName = category.querySelector('h2').textContent;
+      alert(`Please select a contestant for the category: ${categoryName}`);
+    } else {
+      selectedContestants.push(selectedRadio.value);
     }
   });
+
+  if (allCategoriesValid && selectedContestants.length > 0) {
+    console.log('Selected Contestants:', selectedContestants);
+
+    fetch('{{ route('submit.vote') }}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({ contestants: selectedContestants })
+    })
+    .then(response => {
+      if (!response.ok) {
+        // If response status is not OK, throw an error with the status code
+        throw new Error('Something went wrong: ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Response:', data);
+      if (data.success) {
+        alert(data.message || 'Your vote has been submitted!');
+      } else {
+        // Show the specific error message from the server
+        alert(data.message || 'Something went wrong. Try again!');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Error: ' + error.message);
+    });
+  }
+});
+
 </script>
 
 </html>

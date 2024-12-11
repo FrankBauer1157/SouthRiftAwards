@@ -113,85 +113,13 @@ public function submitVotex(Request $request)
 
     return redirect()->route('vote.form')->with('success', 'Your vote has been cast!');
 }
-public function submitVote1(Request $request)
-{
-    $contestantIds = $request->input('contestants');
 
-    // Validate if there are selected contestants
-    if (empty($contestantIds)) {
-        return response()->json(['success' => false, 'message' => 'No contestants selected.']);
-    }
-
-    // Save votes (you can customize how you store votes here)
-    foreach ($contestantIds as $contestantId) {
-        Vote::create([
-            'contestant_id' => $contestantId,
-            'user_id' => auth()->id() // if you're tracking users, otherwise remove
-        ]);
-    }
-
-    return response()->json(['success' => true]);
-}
-public function submitVote2(Request $request)
-{
-    $request->validate([
-        'contestants' => 'required|array|min:1', // Ensure at least one contestant is selected
-        'contestants.*' => 'exists:contestants,id' // Validate that the contestant IDs are valid
-    ]);
-
-    // Get the current user's info (if available)
-    $user = auth()->user(); // You can use $user = auth()->user() for logged-in users, or null for guest users.
-
-    // Retrieve user IP, user agent, and MAC address (if available)
-    $ipAddress = $request->ip();
-    $userAgent = $request->header('User-Agent');
-    $macAddress = $request->header('X-Mac-Address'); // Assume you send MAC address via headers, if possible
-
-    $votes = $request->input('contestants');
-
-    foreach ($votes as $contestantId) {
-        // Check if this user has already voted for this category and contestant
-        $existingVote = VoteUserInfo::where('ip_address', $ipAddress)
-                                    ->where('user_agent', $userAgent)
-                                    ->where('mac_address', $macAddress)
-                                    // ->where('category_id', $request->category_id) // Ensure category_id is available
-                                    ->where('contestant_id', operator: $contestantId)
-                                    ->exists();
-
-        if ($existingVote) {
-            return response()->json([
-                'success' => false,
-                'message' => 'You have already voted for this contestant in this category from this device.'
-            ], 400);
-        }
-    }
-
-    // Proceed with storing the votes if no duplicates
-    foreach ($votes as $contestantId) {
-        VoteUserInfo::create([
-            'user_id' => $user ? $user->id : null, // Store user_id if logged in, else null
-            'ip_address' => $ipAddress,
-            'user_agent' => $userAgent,
-            'mac_address' => $macAddress,
-            // 'category_id' => $request->category_id, // Ensure category_id is available
-            'contestant_id' => $contestantId,
-            'vote_time' => now(),
-        ]);
-    }
-
-    return response()->json([
-        'success' => true,
-        'message' => 'Your vote has been successfully submitted!'
-    ]);
-}
 public function submitVote(Request $request)
 {
     $validated = $request->validate([
         'contestants' => 'required|array',
-        'contestants.*' => 'exists:contestants,id', // assuming contestants table
+        'contestants.*' => 'exists:contestants,id', // assuming contestants table exists
     ]);
-
- //   dd($request);
 
     // Check if the user has already voted by IP/MAC address
     $userInfo = VoteUserInfo::where('ip_address', $request->ip())
@@ -199,16 +127,15 @@ public function submitVote(Request $request)
         ->first();
 
     if ($userInfo) {
-         return response()->json(['false' => 'You have already voted'], 400);
+        return response()->json(['success' => false, 'message' => 'You have already voted'], 400);
     }
 
     // Store user info in voters_user_info table
     $userInfo = new VoteUserInfo;
     $userInfo->ip_address = $request->ip();
-    $userInfo->mac_address = $request->ip();
+    $userInfo->mac_address = $request->mac_address; // Ensure this is correctly set
     $userInfo->user_Agent = $request->userAgent();
-    $userInfo->user_id = 1;
-    // $userInfo->contestant_id = 1;
+    $userInfo->user_id = 1; // You can dynamically fetch the logged-in user ID if applicable
     $userInfo->save();
 
     // Store votes in the votes table
@@ -216,14 +143,13 @@ public function submitVote(Request $request)
         Vote::create([
             'contestant_id' => $contestantId,
             'user_info_id' => $userInfo->id,
-             'category_id' => 0,
-
-            // Assuming you have a relation
+            'category_id' => 0, // Update category_id based on the submitted data, e.g., from $request
         ]);
     }
 
-    return response()->json(['success' => 'Your vote has been submitted!'], 200);
+    return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
 }
+
 
 
 
