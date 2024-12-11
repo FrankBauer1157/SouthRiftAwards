@@ -95,6 +95,7 @@
             <!-- Sponsors Grid -->
             <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 <!-- Sponsor Card -->
+                
                 <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
                     <img src="{{ asset('SMRA/bomet.jpeg') }}" alt="PUMC Logo" class="object-contain w-24 h-24 mb-4 rounded-lg sm:w-32 sm:h-32">
                 </div>
