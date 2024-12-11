@@ -58,8 +58,6 @@ class VoteController extends Controller
     $categories = Category::with('contestants')->get();
     return view('vote', compact('categories'));
 
-    // $categories = Category::with('contestants')->get();
-    // return view('vote', compact('categories'));
 }
 
 public function store(Request $request)
