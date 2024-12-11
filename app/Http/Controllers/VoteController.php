@@ -199,7 +199,7 @@ public function submitVote(Request $request)
         ->first();
 
     if ($userInfo) {
-         return response()->json(['error' => 'You have already voted'], 400);
+         return response()->json(['false' => 'You have already voted'], 400);
     }
 
     // Store user info in voters_user_info table

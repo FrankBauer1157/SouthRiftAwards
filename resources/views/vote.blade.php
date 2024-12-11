@@ -164,7 +164,8 @@
   if (data.success) {
     alert('Your vote has been submitted!');
   } else {
-    alert('Something went wrong: ' + (data.message || 'Try again!'));
+    // Show the specific error message from the server
+    alert(data.message || 'Something went wrong. Try again!');
   }
 })
 .catch(error => {
@@ -172,7 +173,8 @@
   alert('Error: ' + error.message);
 });
 
-      
+
+
     }
   });
 </script>
