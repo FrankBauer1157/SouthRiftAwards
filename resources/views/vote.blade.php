@@ -98,7 +98,7 @@
   </head>
   <body>
     <div class="flex flex-col items-center justify-center min-h-screen p-6 bg-background text-foreground">
-      <h1 class="mb-10 text-5xl font-extrabold text-center text-gradient">Vote for Your Favorite Contestants</h1>
+      <h2 class="mb-10 text-5xl font-extrabold text-center text-gradient">Vote for Your Favorite Contestants</h2>
 
       <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
         @foreach($categories as $category)
@@ -107,14 +107,15 @@
             <div class="grid grid-cols-1 gap-4">
                 @foreach($category->contestants as $contestant)
                 <label class="flex items-center">
-                    <input type="checkbox" class="w-6 h-6 rounded form-checkbox text-primary border-primary focus:ring focus:ring-primary/50" name="contestants[]" value="{{ $contestant->id }}">
+                    <input type="radio" class="w-6 h-6 rounded form-radio text-primary border-primary focus:ring focus:ring-primary/50" name="contestants[{{ $category->id }}]" value="{{ $contestant->id }}">
                     <span class="ml-3 text-lg font-medium">{{ $contestant->name }}</span>
                 </label>
                 @endforeach
             </div>
         </div>
         @endforeach
-      </div>
+    </div>
+
 
       <button id="submit-vote" class="px-8 py-4 mt-10 text-xl font-semibold transition-colors duration-200 rounded-lg shadow-md bg-primary text-primary-foreground hover:bg-primary/80">Submit Vote</button>
     </div>
