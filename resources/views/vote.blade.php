@@ -152,15 +152,26 @@
         },
         body: JSON.stringify({ contestants: selectedContestants })
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Response:', data);
-        if (data.success) {
-          alert('Your vote has been submitted!');
-        } else {
-          alert('Something went wrong. Try again!');
-        }
-      })
+      .then(response => {
+  if (!response.ok) {
+    // If response status is not OK, throw an error with the status code
+    throw new Error('Something went wrong: ' + response.statusText);
+  }
+  return response.json();
+})
+.then(data => {
+  console.log('Response:', data);
+  if (data.success) {
+    alert('Your vote has been submitted!');
+  } else {
+    alert('Something went wrong: ' + (data.message || 'Try again!'));
+  }
+})
+.catch(error => {
+  console.error('Error:', error);
+  alert('Error: ' + error.message);
+});
+
       .catch(error => {
         console.error('Error:', error);
         alert('An error occurred while submitting your vote.');
