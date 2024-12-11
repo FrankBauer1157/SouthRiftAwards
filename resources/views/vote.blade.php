@@ -172,10 +172,7 @@
   alert('Error: ' + error.message);
 });
 
-      .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while submitting your vote.');
-      });
+      
     }
   });
 </script>
