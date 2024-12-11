@@ -12,7 +12,7 @@ class Vote extends Model
     protected $fillable = [
         'contestant_id',
         'user_info_id',
-        'category_id',
+        // 'category_id',
     ];
 
     // Relationship with the Contestant
@@ -22,8 +22,8 @@ class Vote extends Model
     }
 
     // Relationship with the Category
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
+    // public function category()
+    // {
+    //     return $this->belongsTo(Category::class);
+    // }
 }
