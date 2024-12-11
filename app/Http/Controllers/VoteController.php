@@ -191,7 +191,7 @@ public function submitVote(Request $request)
         'contestants.*' => 'exists:contestants,id', // assuming contestants table
     ]);
 
-    dd($request);
+ //   dd($request);
 
     // Check if the user has already voted by IP/MAC address
     $userInfo = VoteUserInfo::where('ip_address', $request->ip())
