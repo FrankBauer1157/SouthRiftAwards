@@ -121,6 +121,7 @@
     </div>
 <script>
   document.getElementById('submit-vote').addEventListener('click', function() {
+    console.log('Submit');
     const categories = document.querySelectorAll('.category-group'); // Group wrapper for each category
     const selectedContestants = [];
     let allCategoriesValid = true;
