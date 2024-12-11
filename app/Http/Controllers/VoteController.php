@@ -90,8 +90,9 @@ public function store(Request $request)
 
     public function showVotingForm()
     {
-        $categories = Category::with('nominees')->get();  // Eager load nominees
-        return view('vote', compact('categories'));
+        $categories = Category::where('status', 'active')->with('contestants')->get();
+    return view('vote', compact('categories'));
+        // return view('vote', compact('categories'));
     }
 
 public function submitVotex(Request $request)
