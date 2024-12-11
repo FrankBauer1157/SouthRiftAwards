@@ -19,7 +19,7 @@ class VoteUserInfo extends Model
         'user_agent',
         'mac_address',
         // 'category_id',
-        'contestant_id',
+        // 'contestant_id',
     ];
 
     // Disable automatic timestamps if you don't need them
