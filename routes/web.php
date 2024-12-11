@@ -53,6 +53,10 @@ Route::post('/vote', [\App\Http\Controllers\VoteController::class, 'submit'])->n
 Route::get('/categories/check', [NominationController::class, 'getAvailableCategories']);
 Route::get('/categories/{id}/nominations', [CategoryController::class, 'getNominations']);
 
+Route::get('/vote', [VoteController::class, 'index'])->name('vote.index');
+Route::post('/vote', [VoteController::class, 'store'])->name('vote.store');
+
+
 
 Auth::routes();
 

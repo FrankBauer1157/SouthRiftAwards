@@ -12,11 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class VoteController extends Controller
 {
 
-    public function index()
-    {
-        $categories = Category::with('nominees')->get();  // Eager load nominees
-        return view('vote', compact('categories'));
-    }
+   
     public function vote(Request $request)
     {
         if ($request->cookie('voted')) {
@@ -57,6 +53,39 @@ class VoteController extends Controller
         // Return success message after storing the vote
         return response()->json(['message' => 'Vote recorded successfully!']);
     }
+    public function index()
+{
+    $categories = Category::with('contestants')->get();
+    return view('vote', compact('categories'));
+}
+
+public function store(Request $request)
+{
+    $request->validate([
+        'contestant_id' => 'required|exists:contestants,id',
+        'category_id' => 'required|exists:categories,id',
+        'voter_identifier' => 'required|string|max:255',
+    ]);
+
+    // Prevent duplicate voting
+    $existingVote = Vote::where('voter_identifier', $request->voter_identifier)
+        ->where('category_id', $request->category_id)
+        ->exists();
+
+    if ($existingVote) {
+        return redirect()->back()->with('error', 'You have already voted in this category.');
+    }
+
+    // Save vote
+    Vote::create([
+        'contestant_id' => $request->contestant_id,
+        'voter_identifier' => $request->voter_identifier,
+        'category_id' => $request->category_id,
+    ]);
+
+    return redirect()->back()->with('success', 'Thank you for voting!');
+}
+
 
     public function showVotingForm()
     {
