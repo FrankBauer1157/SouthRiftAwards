@@ -103,7 +103,7 @@
     <h2 class="mb-10 text-5xl font-extrabold text-center text-gradient">Vote for Your Favorite Contestants</h2>
     <div id="notification" class="notification" style="display: none;">
         <span id="notification-message"></span>
-        <button id="notification-close" onclick="hideNotification()">X</button>
+        <button id="notification-close" onclick="hideNotification()"></button>
       </div>
       <style>
         .notification {
@@ -112,7 +112,7 @@
           left: 0;
           right: 0;
           background-color: #f44336; /* Error background */
-          color: white;
+          color: rgb(17, 17, 17);
           text-align: center;
           padding: 15px;
           font-size: 16px;
@@ -198,6 +198,7 @@ document.getElementById('submit-vote').addEventListener('click', function() {
       return response.json();
     })
     .then(data => {
+        
       console.log('Response:', data);
       if (data.success) {
         showNotification('Your vote has been submitted!', 'success');
