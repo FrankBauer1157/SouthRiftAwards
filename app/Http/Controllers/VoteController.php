@@ -206,7 +206,7 @@ public function submitVote(Request $request)
     $userInfo = new VoteUserInfo;
     $userInfo->ip_address = $request->ip();
     $userInfo->mac_address = $request->ip();
-    $userInfo->userAgent = $request->userAgent();
+    $userInfo->user_Agent = $request->userAgent();
     $userInfo->user_id = 1;
     $userInfo->save();
 
