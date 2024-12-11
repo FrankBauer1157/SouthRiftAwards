@@ -23,7 +23,7 @@ class VoteUserInfo extends Model
     ];
 
     // Disable automatic timestamps if you don't need them
-    public $timestamps = true;  // Default is true
+    public $timestamps = false;  // Default is true
 
     // Optionally, you can define relationships here if needed
 }
