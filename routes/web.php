@@ -45,6 +45,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
 
+    Route::get('/voted', [DashboardController::class, 'voted'])
+    ->name('sponsors');
 
 // Public nomination form
 Route::post('/nomination', [NominationController::class, 'store'])->name('nomination.store');
@@ -56,6 +58,10 @@ Route::get('/categories/{id}/nominations', [CategoryController::class, 'getNomin
 Route::get('/vote', [VoteController::class, 'index'])->name('vote.index');
 Route::post('/vote', [VoteController::class, 'store'])->name('vote.store');
 Route::post('/submit-vote', [VoteController::class, 'submitVote'])->name('submit.vote');
+
+
+
+
 
 
 
