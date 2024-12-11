@@ -102,7 +102,7 @@
                   </p>
                   <div class="flex items-center justify-center mt-2">
                     <!-- WhatsApp -->
-                    <a href="https://api.whatsapp.com/send?text=Vote%20now%20in%20the%20South%20Rift%20Matatu%20Awards%202024!%20https://srma2024.com/vote"
+                    <a href="https://southriftmatatuawards.co.ke/"
                        target="_blank"
                        rel="noopener noreferrer"
                        class="ml-2 text-gray-400 hover:text-gray-600">
@@ -112,7 +112,7 @@
                     </a>
 
                     <!-- Facebook -->
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://srma2024.com/vote"
+                    <a href="https://southriftmatatuawards.co.ke/"
                        target="_blank"
                        rel="noopener noreferrer"
                        class="ml-2 text-gray-400 hover:text-gray-600">
