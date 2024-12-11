@@ -4,31 +4,29 @@
 <div class="container">
     <h1 class="text-center">Vote for Your Favorite Contestants</h1>
 
-    @foreach ($categories as $category)
-        <div class="mt-5 category">
-            <h2>{{ $category->name }}</h2>
-            <div class="row">
-                @foreach ($category->contestants as $contestant)
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $contestant->name }}</h5>
-                                <form method="POST" action="{{ route('vote.store') }}">
+    <div class="grid w-full grid-cols-1 gap-4 p-4 max-w-7xl sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+        @foreach ($categories as $category)
+            <div class="overflow-hidden text-white transition-transform transform bg-blue-500 rounded-lg shadow-lg cursor-pointer hover:scale-105">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold">{{ $category->name }}</h2>
+                    <p class="text-lg">{{ $category->contestants->count() }} Contestants</p>
+                </div>
+                <div class="p-4">
+                    <ul>
+                        @foreach ($category->contestants as $contestant)
+                            <li>
+                                <form action="{{ route('vote.store') }}" method="POST">
                                     @csrf
-                                    <input type="hidden" name="contestant_id" value="{{ $contestant->id }}">
                                     <input type="hidden" name="category_id" value="{{ $category->id }}">
-                                    <div class="mb-3">
-                                        <label for="voter_identifier" class="form-label">Your Identifier (e.g., Email)</label>
-                                        <input type="text" class="form-control" id="voter_identifier" name="voter_identifier" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Vote</button>
+                                    <input type="hidden" name="contestant_id" value="{{ $contestant->id }}">
+                                    <button type="submit" class="btn btn-primary">{{ $contestant->name }} - Vote</button>
                                 </form>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
 </div>
 @endsection

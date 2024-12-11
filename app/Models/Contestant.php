@@ -15,6 +15,7 @@ class Contestant extends Model
     ];
 
     // Inverse of the relationship
+ 
     public function category()
     {
         return $this->belongsTo(Category::class);

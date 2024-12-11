@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class VoteController extends Controller
 {
 
-   
+
     public function vote(Request $request)
     {
         if ($request->cookie('voted')) {
@@ -57,6 +57,9 @@ class VoteController extends Controller
 {
     $categories = Category::with('contestants')->get();
     return view('vote', compact('categories'));
+
+    // $categories = Category::with('contestants')->get();
+    // return view('vote', compact('categories'));
 }
 
 public function store(Request $request)

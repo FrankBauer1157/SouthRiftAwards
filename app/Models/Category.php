@@ -15,6 +15,10 @@ class Category extends Model
     return $this->hasMany(related: Nomination::class);
 
 }
+public function contestants()
+    {
+        return $this->hasMany(Contestant::class); // Define a one-to-many relationship
+    }
 
 }
 
