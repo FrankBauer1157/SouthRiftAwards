@@ -146,7 +146,7 @@ Vote for Your Favorite Contestants
         }
       </style>
  <div class="flex flex-col items-center bg-white rounded-lg shadow-md p-6sdf">
-    <img src="{{ asset('SMRA/bomet.jpeg') }}" alt="PUMC Logo" class="object-contain w-24 h-24 mb-4 rounded-lg sm:w-32 sm:h-32">
+    <img src="{{ asset('SMRA/brandname.png') }}" alt="PUMC Logo" class="object-contain w-24 h-24 mb-4 rounded-lg sm:w-32 sm:h-32">
 </div>
 <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
     @foreach($categories as $category)
