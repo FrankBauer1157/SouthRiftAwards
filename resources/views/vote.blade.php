@@ -155,16 +155,17 @@ document.getElementById('submit-vote').addEventListener('click', function() {
     .then(response => {
       if (!response.ok) {
         // If response status is not OK, throw an error with the status code
-        throw new Error('Something went wrong: ' + response.statusText);
+        return response.json().then(err => {
+          throw new Error(err.message || 'Something went wrong');
+        });
       }
       return response.json();
     })
     .then(data => {
       console.log('Response:', data);
       if (data.success) {
-        alert(data.message || 'Your vote has been submitted!');
+        alert('Your vote has been submitted!');
       } else {
-        // Show the specific error message from the server
         alert(data.message || 'Something went wrong. Try again!');
       }
     })
@@ -174,6 +175,7 @@ document.getElementById('submit-vote').addEventListener('click', function() {
     });
   }
 });
+
 
 </script>
 

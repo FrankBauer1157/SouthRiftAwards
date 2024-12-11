@@ -118,7 +118,7 @@ public function submitVote(Request $request)
 {
     $validated = $request->validate([
         'contestants' => 'required|array',
-        'contestants.*' => 'exists:contestants,id', // assuming contestants table exists
+        'contestants.*' => 'exists:contestants,id',
     ]);
 
     // Check if the user has already voted by IP/MAC address
@@ -133,9 +133,9 @@ public function submitVote(Request $request)
     // Store user info in voters_user_info table
     $userInfo = new VoteUserInfo;
     $userInfo->ip_address = $request->ip();
-    $userInfo->mac_address = $request->mac_address; // Ensure this is correctly set
+    $userInfo->mac_address = $request->mac_address;
     $userInfo->user_Agent = $request->userAgent();
-    $userInfo->user_id = 1; // You can dynamically fetch the logged-in user ID if applicable
+    $userInfo->user_id = 1;
     $userInfo->save();
 
     // Store votes in the votes table
@@ -143,12 +143,13 @@ public function submitVote(Request $request)
         Vote::create([
             'contestant_id' => $contestantId,
             'user_info_id' => $userInfo->id,
-            'category_id' => 0, // Update category_id based on the submitted data, e.g., from $request
+            'category_id' => 0, // Assuming you have the category ID
         ]);
     }
 
     return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
 }
+
 
 
 
