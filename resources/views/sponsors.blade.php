@@ -44,16 +44,14 @@
                         <a href="{{ route('vote.index') }}" class="inline-block px-8 py-3 text-lg font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">
                             Vote Now
                         </a>
-                      
+
                     </section>
                     <section class="text-center">
                         {{-- vote now button --}}
-                        <a href="{{ route('vote.index') }}" class="inline-block px-8 py-3 text-lg font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">
-                            Vote Now
-                        </a>
-                        <h2 class="text-3xl font-bold text-blue-600">
+
+                        <h3 class="text-3xl font-bold text-blue-600">
                             Our Valued Sponsors
-                        </h2>
+                        </h3>
                         <p class="mt-2 mb-8 text-base text-gray-600">
                             A heartfelt thank you to all our sponsors for their invaluable support and commitment to the success of the South-Rift Matatu Awards 2024!
                         </p>
