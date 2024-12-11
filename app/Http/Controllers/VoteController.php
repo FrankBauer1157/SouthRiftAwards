@@ -166,7 +166,7 @@ public function submitVote(Request $request)
         return response()->json([
             'success' => false,
             'message' => 'You have already voted.',
-            'redirect_url' => route('nomination.sponsors') // Replace with your redirection route
+            'redirect_url' => route('sponsors') // Replace with your redirection route
         ], 400);
     }
 
