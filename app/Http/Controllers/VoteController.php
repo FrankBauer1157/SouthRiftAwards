@@ -199,13 +199,16 @@ public function submitVote(Request $request)
         ->first();
 
     if ($userInfo) {
-        return response()->json(['error' => 'You have already voted'], 400);
+        // return response()->json(['error' => 'You have already voted'], 400);
     }
+
+
+
 
     // Store user info in voters_user_info table
     $userInfo = new VoteUserInfo;
     $userInfo->ip_address = $request->ip();
-    $userInfo->mac_address = $request->mac_address;
+    $userInfo->mac_address = $request->ip();
     $userInfo->save();
 
     // Store votes in the votes table
@@ -213,7 +216,7 @@ public function submitVote(Request $request)
         Vote::create([
             'contestant_id' => $contestantId,
             'user_info_id' => $userInfo->id,
-            'category_id' => $category->id,
+            // 'category_id' => $category->id,
 
             // Assuming you have a relation
         ]);
