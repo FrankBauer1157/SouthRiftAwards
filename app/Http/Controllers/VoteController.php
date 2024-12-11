@@ -163,18 +163,19 @@ public function submitVote(Request $request)
         ->first();
 
     if ($userInfo) {
+        // Return a JSON response with a redirect URL
         return response()->json([
             'success' => false,
-            'message' => 'You have already voted.',
-            'redirect_url' => route('sponsors') // Replace with your redirection route
+            'redirect' => route('sponsors'),
+            'message' => 'You have already voted!'
         ], 400);
     }
 
     // Store user info in voters_user_info table
     $userInfo = new VoteUserInfo;
     $userInfo->ip_address = $request->ip();
-    $userInfo->mac_address = $request->ip();
-    $userInfo->user_agent = $request->userAgent();
+    $userInfo->mac_address = $request->ip(); // Assuming you store IP in place of MAC
+    $userInfo->user_Agent = $request->userAgent();
     $userInfo->user_id = 1;
     $userInfo->save();
 
