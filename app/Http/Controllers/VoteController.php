@@ -94,7 +94,7 @@ public function store(Request $request)
         return view('vote', compact('categories'));
     }
 
-public function submitVote(Request $request)
+public function submitVotex(Request $request)
 {
     // Validation (ensure only one vote per identifier)
     $request->validate([
@@ -110,5 +110,25 @@ public function submitVote(Request $request)
 
     return redirect()->route('vote.form')->with('success', 'Your vote has been cast!');
 }
+public function submitVote(Request $request)
+{
+    $contestantIds = $request->input('contestants');
+
+    // Validate if there are selected contestants
+    if (empty($contestantIds)) {
+        return response()->json(['success' => false, 'message' => 'No contestants selected.']);
+    }
+
+    // Save votes (you can customize how you store votes here)
+    foreach ($contestantIds as $contestantId) {
+        Vote::create([
+            'contestant_id' => $contestantId,
+            'user_id' => auth()->id() // if you're tracking users, otherwise remove
+        ]);
+    }
+
+    return response()->json(['success' => true]);
+}
+
 
 }
