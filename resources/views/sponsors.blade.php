@@ -93,9 +93,28 @@
         <section class="text-center">
             {{-- vote now button --}}
             <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                {{-- share voting link  --}}
                 <a href="{{ route('vote.index') }}" class="inline-block px-8 py-3 text-lg font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">
                     Vote Now
                 </a>
+                <p class="mt-2 text-sm text-gray-500">
+                    Share this voting link with your friends and family to encourage participation!
+                </p>
+                <div class="flex items-center justify-center mt-2">
+                    <a href="https://twitter.com/share?text=South-Rift%20Matatu%20Awards%202024%20-%20Vote%20now%20at%20@SRMA2024&url=https://srma2024.com/vote" target="_blank" rel="noopener noreferrer" class="ml-2 text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 4H0C0 2.20914 2.20914 0 4.5 0H23.5C25.7908 0 28 2.20914 28 4V20C28 21.7908 25.7908 24 23.5 24H4.5C2.20914 24 0 21.7908 0 20V4ZM19.5 16C19.5 15.6716 19.1716 15.3431 18.8431 15.3431H11.1569C10.8
+                            15.3431 10.5284 10.8 16 11.1569 16H18.8431C19.1716 16 19.5 15.6716 19.5 15.3431ZM11.1569 21C10.8284
+                            21 10.5284 20.8284 10.3431 20.5 10.3431H16C16.3284 10.3431 16.6569 10.6716 16.6569 11.1569C16.6569
+                            11.6431 16.3284 11.6431 16 11.1569 16ZM18.8431 21C19.1716 21 19.5 20.8284 19.5 20.5C19.5 20.1716 19.
+                            19.8284 19.1716 19.8284 18.8431C19.8284 18.5146 19.5 18.5146 19.1716
+                            18.5146 18.2854 18.5146 18.2854 18.8431 18.2854C19.1716 18.2854 19.5 18.5146 19.5 18.8431C19.5 19.1
+
+                            18.2854 19.8284 18.5146 19.8284 18.8431 19.8284C19.1716 19.8284 19.5 19.5 19.5 19.1716C19.5 18.843
+                            18.5146 18.5146 18.2854 18.2854 18.2854 18.8431C18.2854 19.1716 18.5146 19.8284 18.8431"></path>
+
+                            </a>
+
             </div>
 
 
