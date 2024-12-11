@@ -42,6 +42,8 @@
             <section class="text-center">
                 {{-- vote now button --}}
                 <a href="{{ route('nominations.create') }}" class="inline-block px-8 py-3 text-lg font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">
+                    Vote Now
+                </a>
                 <h2 class="text-3xl font-bold text-blue-600">
                     Our Valued Sponsors
                 </h2>
