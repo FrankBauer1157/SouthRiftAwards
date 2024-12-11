@@ -18,14 +18,14 @@
     <div class="flex flex-col justify-between min-h-screen">
         <!-- Header -->
         <header class="py-12 text-center text-white" style="background: linear-gradient(135deg, #0d47a1, #1976d2, #64b5f6);">
-            <h1 class="text-4xl font-bold" style="
+            <h3 class="text-4xl font-bold" style="
                 background: linear-gradient(to right, #ff9800, #ffc107, #fdd835);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
             ">
                 SOUTH-RIFT MATATU AWARDS - 2024
-            </h1>
+            </h3>
             <p class="mt-4 text-lg text-gray-200">
                Thank you for perticipating in SRMA-AWARDS -2024.
             </p>
