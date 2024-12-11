@@ -40,9 +40,9 @@ class VoteController extends Controller
 
         if ($existingVote) {
             // If a vote already exists, reject the request
-            // return response()->json([
-            //     'message' => 'You have already voted for this nominee.',
-            // ], 403);  // HTTP Status 403 Forbidden
+            return response()->json([
+                'message' => 'You have already voted for this nominee.',
+            ], 403);  // HTTP Status 403 Forbidden
         }
 
         // If validation passes and no previous vote is found, store the vote
@@ -203,14 +203,14 @@ public function submitVote(Request $request)
         ->orWhere('mac_address', $request->mac_address)
         ->first();
 
-    if ($userInfo) {
-        // Use Laravel's session to store the message
-        session()->flash('message', 'You have already voted! Thank you for your participation.');
-        return response()->json([
-            'success' => false,
-            'redirect' => route('sponsors'),
-        ], 400);
-    }
+    // if ($userInfo) {
+    //     // Use Laravel's session to store the message
+    //     session()->flash('message', 'You have already voted! Thank you for your participation.');
+    //     return response()->json([
+    //         'success' => false,
+    //         'redirect' => route('sponsors'),
+    //     ], 400);
+    // }
 
     // Store user info in voters_user_info table
     $userInfo = new VoteUserInfo;
