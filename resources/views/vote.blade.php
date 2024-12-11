@@ -3,11 +3,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-    <!-- Toastr CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-
-<!-- Toastr JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 		<script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
 		<script type="text/javascript">
@@ -106,6 +101,42 @@
    <body>
   <div class="flex flex-col items-center justify-center min-h-screen p-6 bg-background text-foreground">
     <h2 class="mb-10 text-5xl font-extrabold text-center text-gradient">Vote for Your Favorite Contestants</h2>
+    <div id="notification" class="notification" style="display: none;">
+        <span id="notification-message"></span>
+        <button id="notification-close" onclick="hideNotification()">X</button>
+      </div>
+      <style>
+        .notification {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          background-color: #f44336; /* Error background */
+          color: white;
+          text-align: center;
+          padding: 15px;
+          font-size: 16px;
+          z-index: 1000;
+        }
+        .notification.success {
+          background-color: #4CAF50; /* Success background */
+        }
+        .notification.warning {
+          background-color: #FFC107; /* Warning background */
+        }
+        .notification.info {
+          background-color: #2196F3; /* Info background */
+        }
+        #notification-close {
+          background: none;
+          border: none;
+          color: white;
+          font-weight: bold;
+          font-size: 16px;
+          margin-left: 15px;
+          cursor: pointer;
+        }
+      </style>
 
     <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
       @foreach($categories as $category)
@@ -131,7 +162,7 @@
 
 <script>
 document.getElementById('submit-vote').addEventListener('click', function() {
-  console.log('Submit button clicked');
+    console.log('Submit button clicked');
   const categories = document.querySelectorAll('.category-group');
   const selectedContestants = [];
   let allCategoriesValid = true;
@@ -141,7 +172,7 @@ document.getElementById('submit-vote').addEventListener('click', function() {
     if (!selectedRadio) {
       allCategoriesValid = false;
       const categoryName = category.querySelector('h2').textContent;
-      toastr.warning(`Please select a contestant for the category: ${categoryName}`);
+      showNotification(`Please select a contestant for the category: ${categoryName}`, 'warning');
     } else {
       selectedContestants.push(selectedRadio.value);
     }
@@ -169,16 +200,39 @@ document.getElementById('submit-vote').addEventListener('click', function() {
     .then(data => {
       console.log('Response:', data);
       if (data.success) {
-        toastr.success('Your vote has been submitted!');
+        showNotification('Your vote has been submitted!', 'success');
       } else {
-        toastr.error(data.message || 'Something went wrong. Try again!');
+        showNotification(data.message || 'Something went wrong. Try again!', 'error');
       }
     })
     .catch(error => {
       console.error('Error:', error);
-      toastr.error('Error: ' + error.message);
+      showNotification('Error: ' + error.message || 'Unknown error occurred', 'error');
     });
   }
+
+
+  function showNotification(message, type = 'error') {
+  const notification = document.getElementById('notification');
+  const messageElement = document.getElementById('notification-message');
+
+  messageElement.textContent = message;
+  notification.className = `notification ${type}`; // Add the type class
+  notification.style.display = 'block';
+
+  // Auto-hide after 5 seconds
+  setTimeout(() => {
+    hideNotification();
+  }, 5000);
+}
+
+function hideNotification() {
+  const notification = document.getElementById('notification');
+  notification.style.display = 'none';
+}
+
+
+
 });
 
 
