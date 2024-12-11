@@ -132,7 +132,7 @@ public function submitVote1(Request $request)
 
     return response()->json(['success' => true]);
 }
-public function submitVote(Request $request)
+public function submitVote2(Request $request)
 {
     $request->validate([
         'contestants' => 'required|array|min:1', // Ensure at least one contestant is selected
@@ -184,6 +184,44 @@ public function submitVote(Request $request)
         'message' => 'Your vote has been successfully submitted!'
     ]);
 }
+public function submitVote(Request $request)
+{
+    $validated = $request->validate([
+        'contestants' => 'required|array',
+        'contestants.*' => 'exists:contestants,id', // assuming contestants table
+    ]);
+
+    dd($request);
+
+    // Check if the user has already voted by IP/MAC address
+    $userInfo = VoteUserInfo::where('ip_address', $request->ip())
+        ->orWhere('mac_address', $request->mac_address)
+        ->first();
+
+    if ($userInfo) {
+        return response()->json(['error' => 'You have already voted'], 400);
+    }
+
+    // Store user info in voters_user_info table
+    $userInfo = new VoteUserInfo;
+    $userInfo->ip_address = $request->ip();
+    $userInfo->mac_address = $request->mac_address;
+    $userInfo->save();
+
+    // Store votes in the votes table
+    foreach ($request->contestants as $contestantId) {
+        Vote::create([
+            'contestant_id' => $contestantId,
+            'user_info_id' => $userInfo->id,
+            'category_id' => $category->id,
+
+            // Assuming you have a relation
+        ]);
+    }
+
+    return response()->json(['success' => 'Your vote has been submitted!'], 200);
+}
+
 
 
 }

@@ -18,7 +18,7 @@ class VoteUserInfo extends Model
         'ip_address',
         'user_agent',
         'mac_address',
-        'category_id',
+        // 'category_id',
         'contestant_id',
     ];
 
