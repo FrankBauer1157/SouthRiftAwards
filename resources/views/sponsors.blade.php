@@ -39,13 +39,7 @@
                 <!-- Main Content -->
                 <main class="container px-4 py-8 mx-auto">
                     <!-- Sponsors Section -->
-                    <section class="text-center">
-                        {{-- vote now button --}}
-                        <a href="{{ route('vote.index') }}" class="inline-block px-8 py-3 text-lg font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">
-                            Vote Now
-                        </a>
 
-                    </section>
                     <section class="text-center">
                         {{-- vote now button --}}
 
@@ -93,7 +87,13 @@
                 </div>
             </div>
         </main>
+        <section class="text-center">
+            {{-- vote now button --}}
+            <a href="{{ route('vote.index') }}" class="inline-block px-8 py-3 text-lg font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">
+                Vote Now
+            </a>
 
+        </section>
         <!-- Footer -->
         <footer class="py-6 text-center text-gray-200 bg-gray-800">
             <p>Patron: Kenda Vin</p>
