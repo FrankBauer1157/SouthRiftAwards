@@ -14,15 +14,9 @@ class Contestant extends Model
         'category_id',
     ];
 
-    // Relationship with the Category
+    // Inverse of the relationship
     public function category()
     {
         return $this->belongsTo(Category::class);
-    }
-
-    // Relationship with Votes
-    public function votes()
-    {
-        return $this->hasMany(Vote::class);
     }
 }
