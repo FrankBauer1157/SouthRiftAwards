@@ -27,7 +27,7 @@
                 SOUTH-RIFT MATATU AWARDS - 2024
             </h1>
             <p class="mt-4 text-lg text-gray-200">
-                Nominations have ended. Thank you for participating! Stay tuned—voting will begin soon.
+               Thank you for perticipating in SRMA-AWARDS -2024.
             </p>
         </header>
 

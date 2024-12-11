@@ -3,6 +3,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <!-- Toastr CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 		<script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
 		<script type="text/javascript">
 			window.tailwind.config = {
@@ -135,7 +141,7 @@ document.getElementById('submit-vote').addEventListener('click', function() {
     if (!selectedRadio) {
       allCategoriesValid = false;
       const categoryName = category.querySelector('h2').textContent;
-      alert(`Please select a contestant for the category: ${categoryName}`);
+      toastr.warning(`Please select a contestant for the category: ${categoryName}`);
     } else {
       selectedContestants.push(selectedRadio.value);
     }
@@ -154,7 +160,6 @@ document.getElementById('submit-vote').addEventListener('click', function() {
     })
     .then(response => {
       if (!response.ok) {
-        // If response status is not OK, throw an error with the status code
         return response.json().then(err => {
           throw new Error(err.message || 'Something went wrong');
         });
@@ -164,14 +169,14 @@ document.getElementById('submit-vote').addEventListener('click', function() {
     .then(data => {
       console.log('Response:', data);
       if (data.success) {
-        alert('Your vote has been submitted!');
+        toastr.success('Your vote has been submitted!');
       } else {
-        alert(data.message || 'Something went wrong. Try again!');
+        toastr.error(data.message || 'Something went wrong. Try again!');
       }
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('Error: ' + error.message);
+      toastr.error('Error: ' + error.message);
     });
   }
 });
