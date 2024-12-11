@@ -223,7 +223,10 @@ document.getElementById('submit-vote').addEventListener('click', function() {
     });
   }
 
-
+  function shoNotification() {
+    const notification = document.getElementById('notification');
+    notification.style.display = 'block';
+  }
 
 function hideNotification() {
   const notification = document.getElementById('notification');
