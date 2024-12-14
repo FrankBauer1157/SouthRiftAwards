@@ -84,18 +84,25 @@
                     <section class="text-center">
                         {{-- vote now button --}}
 
-                        <h3 class="text-3xl font-bold text-blue-600">
+                        <div class="flex flex-col items-center p-12 bg-white">
+                            <img src="{{ asset('logo.jpeg') }}"
+                                 alt="PUMC Logo"
+                                 class="object-contain w-64 h-64 mb-4 rounded-lg sm:w-80 sm:h-80 md:w-96 md:h-96">
+                          </div>
+
+                        {{-- <h3 class="text-3xl font-bold text-blue-600">
                             Our Valued Sponsors
                         </h3>
                         <p class="mt-2 mb-8 text-base text-gray-600">
                             A heartfelt thank you to all our sponsors for their invaluable support and commitment to the success of the South-Rift Matatu Awards 2024!
-                        </p>
+                        </p> --}}
+
                     </section>
 
             <!-- Sponsors Grid -->
             <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 <!-- Sponsor Card -->
-                
+
                 <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
                     <img src="{{ asset('SMRA/bomet.jpeg') }}" alt="PUMC Logo" class="object-contain w-24 h-24 mb-4 rounded-lg sm:w-32 sm:h-32">
                 </div>
