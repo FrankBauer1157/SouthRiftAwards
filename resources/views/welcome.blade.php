@@ -1,7 +1,21 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vote for your favorite contestants in the South Rift Matatu Awards-2024. Cast your vote and help decide the winners!">
+    <meta name="keywords" content="Voting, Contestants, Awards, Best Driver, Nominees">
+    <meta name="author" content="Kenda Vin">
+
+    <meta property="og:title" content="Contestants Page">
+    <meta property="og:description" content="Vote for your favorite contestants in the South Rift Matatu Awards-2024!">
+    <meta property="og:image" content="{{ asset('logo.jpeg') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+
+
+
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <style>
         .gradient-title {
