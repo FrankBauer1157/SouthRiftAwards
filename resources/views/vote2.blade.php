@@ -147,7 +147,7 @@ Vote for Your Favorite Contestants
       </style>
 
 <div class="flex flex-col items-center p-12 bg-white ">
-    <img src="{{ asset('SMRA/brandname.png') }}"
+    <img src="{{ asset('logo.jpeg') }}"
          alt="PUMC Logo"
          class="object-contain w-48 h-48 mb-4 rounded-lg sm:w-64 sm:h-64">
   </div>
