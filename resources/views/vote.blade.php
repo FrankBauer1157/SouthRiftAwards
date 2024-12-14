@@ -256,6 +256,7 @@ document.getElementById('submit-vote').addEventListener('click', function() {
   }, 5000);
 }
 
+
 function hideNotification() {
   const notification = document.getElementById('notification');
   notification.style.display = 'none';
