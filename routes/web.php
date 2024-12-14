@@ -51,6 +51,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 // Public nomination form
 Route::post('/nomination', [NominationController::class, 'store'])->name('nomination.store');
 Route::get('/vote', [\App\Http\Controllers\VoteController::class, 'index'])->name('vote.index'); // Public voting page
+Route::get('/vote2', [\App\Http\Controllers\VoteController::class, 'index2'])->name('vote2.index'); // Public voting page
 Route::post('/vote', [\App\Http\Controllers\VoteController::class, 'submit'])->name('vote.submit');
 Route::get('/categories/check', [NominationController::class, 'getAvailableCategories']);
 Route::get('/categories/{id}/nominations', [CategoryController::class, 'getNominations']);

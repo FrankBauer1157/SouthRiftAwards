@@ -61,6 +61,13 @@ class VoteController extends Controller
     return view('vote', compact('categories'));
 
 }
+public function index2()
+{
+    $categories = Category::where('status', 'active')->get();
+    // $categories = Category::with('contestants')->get();
+    return view('vote2', compact('categories'));
+
+}
 
 public function store(Request $request)
 {

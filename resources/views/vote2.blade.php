@@ -1,147 +1,275 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voting Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .category {
-            margin-bottom: 20px;
-        }
-        .category h2 {
-            font-size: 1.2em;
-            color: #555;
-        }
-        .contestant {
-            margin: 10px 0;
-            background-color: #f9f9f9;
-            padding: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .vote-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .vote-btn:disabled {
-            background-color: #ccc;
-        }
-        .vote-btn:hover {
-            background-color: #45a049;
-        }
-        .category-buttons {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-        .category-buttons button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .category-buttons button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Vote for Your Favorite Contestants</h1>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
 
-        <form id="votingForm">
-            <div class="category" id="category1">
-                <h2>Category 1</h2>
-                <div class="contestant">
-                    <span>Contestant A</span>
-                    <button type="button" class="vote-btn" onclick="vote('category1', 'Contestant A')">Vote</button>
-                </div>
-                <div class="contestant">
-                    <span>Contestant B</span>
-                    <button type="button" class="vote-btn" onclick="vote('category1', 'Contestant B')">Vote</button>
-                </div>
-                <div class="contestant">
-                    <span>Contestant C</span>
-                    <button type="button" class="vote-btn" onclick="vote('category1', 'Contestant C')">Vote</button>
-                </div>
-            </div>
+		<script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+		<script type="text/javascript">
+			window.tailwind.config = {
+				darkMode: ['class'],
+				theme: {
+					extend: {
+						colors: {
+							border: 'hsl(var(--border))',
+							input: 'hsl(var(--input))',
+							ring: 'hsl(var(--ring))',
+							background: 'hsl(var(--background))',
+							foreground: 'hsl(var(--foreground))',
+							primary: {
+								DEFAULT: 'hsl(var(--primary))',
+								foreground: 'hsl(var(--primary-foreground))'
+							},
+							secondary: {
+								DEFAULT: 'hsl(var(--secondary))',
+								foreground: 'hsl(var(--secondary-foreground))'
+							},
+							destructive: {
+								DEFAULT: 'hsl(var(--destructive))',
+								foreground: 'hsl(var(--destructive-foreground))'
+							},
+							muted: {
+								DEFAULT: 'hsl(var(--muted))',
+								foreground: 'hsl(var(--muted-foreground))'
+							},
+							accent: {
+								DEFAULT: 'hsl(var(--accent))',
+								foreground: 'hsl(var(--accent-foreground))'
+							},
+							popover: {
+								DEFAULT: 'hsl(var(--popover))',
+								foreground: 'hsl(var(--popover-foreground))'
+							},
+							card: {
+								DEFAULT: 'hsl(var(--card))',
+								foreground: 'hsl(var(--card-foreground))'
+							},
+						},
+					}
+				}
+			}
+		</script>
+		<style type="text/tailwindcss">
+			@layer base {
+				:root {
+					--background: 0 0% 100%;
+--foreground: 224 71.4% 4.1%;
+--card: 0 0% 100%;
+--card-foreground: 224 71.4% 4.1%;
+--popover: 0 0% 100%;
+--popover-foreground: 224 71.4% 4.1%;
+--primary: 220.9 39.3% 11%;
+--primary-foreground: 210 20% 98%;
+--secondary: 220 14.3% 95.9%;
+--secondary-foreground: 220.9 39.3% 11%;
+--muted: 220 14.3% 95.9%;
+--muted-foreground: 220 8.9% 46.1%;
+--accent: 220 14.3% 95.9%;
+--accent-foreground: 220.9 39.3% 11%;
+--destructive: 0 84.2% 60.2%;
+--destructive-foreground: 210 20% 98%;
+--border: 220 13% 91%;
+--input: 220 13% 91%;
+--ring: 224 71.4% 4.1%;
+--radius: 0.35rem;
+				}
+				.dark {
+					--background: 224 71.4% 4.1%;
+--foreground: 210 20% 98%;
+--card: 224 71.4% 4.1%;
+--card-foreground: 210 20% 98%;
+--popover: 224 71.4% 4.1%;
+--popover-foreground: 210 20% 98%;
+--primary: 210 20% 98%;
+--primary-foreground: 220.9 39.3% 11%;
+--secondary: 215 27.9% 16.9%;
+--secondary-foreground: 210 20% 98%;
+--muted: 215 27.9% 16.9%;
+--muted-foreground: 217.9 10.6% 64.9%;
+--accent: 215 27.9% 16.9%;
+--accent-foreground: 210 20% 98%;
+--destructive: 0 62.8% 30.6%;
+--destructive-foreground: 210 20% 98%;
+--border: 215 27.9% 16.9%;
+--input: 215 27.9% 16.9%;
+--ring: 216 12.2% 83.9%;
+				}
+			}
+		</style>
+  </head>
 
-            <div class="category" id="category2">
-                <h2>Category 2</h2>
-                <!-- Repeat similar structure for Category 2 -->
-            </div>
-
-            <div class="category" id="category3">
-                <h2>Category 3</h2>
-                <!-- Repeat similar structure for Category 3 -->
-            </div>
-
-            <div class="category" id="category4">
-                <h2>Category 4</h2>
-                <!-- Repeat similar structure for Category 4 -->
-            </div>
-
-            <div class="category" id="category5">
-                <h2>Category 5</h2>
-                <!-- Repeat similar structure for Category 5 -->
-            </div>
-
-            <div class="category" id="category6">
-                <h2>Category 6</h2>
-                <!-- Repeat similar structure for Category 6 -->
-            </div>
-
-            <div class="category-buttons">
-                <button type="submit">Submit Votes</button>
-            </div>
-        </form>
-    </div>
-
-    <script>
-        let votes = {
-            category1: null,
-            category2: null,
-            category3: null,
-            category4: null,
-            category5: null,
-            category6: null,
-        };
-
-        function vote(category, contestant) {
-            votes[category] = contestant;
-            alert(`You voted for ${contestant} in ${category}`);
+   <body>
+  <div class="flex flex-col items-center justify-center min-h-screen p-6 bg-background text-foreground">
+    {{-- <h2 class="mb-10 text-5xl font-extrabold text-center text-gradient">Vote for Your Favorite Contestants</h2> --}}
+    {{-- <h4 class="text-4xl font-bold" style="
+    background: linear-gradient(to right, #ff9800, #ffc107, #fdd835);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+">
+Vote for Your Favorite Contestants
+</h4> --}}
+    <div id="notification" class="notification" style="display: none;">
+        <span id="notification-message"></span>
+        <button id="notification-close" onclick="hideNotification()"></button>
+      </div>
+      <style>
+        .notification {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          background-color: #f44336; /* Error background */
+          color: rgb(17, 17, 17);
+          text-align: center;
+          padding: 15px;
+          font-size: 16px;
+          z-index: 1000;
         }
+        .notification.success {
+          background-color: #4CAF50; /* Success background */
+        }
+        .notification.warning {
+          background-color: #FFC107; /* Warning background */
+        }
+        .notification.info {
+          background-color: #2196F3; /* Info background */
+        }
+        #notification-close {
+          background: none;
+          border: none;
+          color: white;
+          font-weight: bold;
+          font-size: 16px;
+          margin-left: 15px;
+          cursor: pointer;
+        }
+      </style>
+      
+<div class="flex flex-col items-center p-12 bg-white ">
+    <img src="{{ asset('SMRA/brandname.png') }}"
+         alt="PUMC Logo"
+         class="object-contain w-48 h-48 mb-4 rounded-lg sm:w-64 sm:h-64">
+  </div>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+    @foreach ($categories as $category)
+        <div class="p-4 border rounded-lg shadow-md">
+            <h2 class="mb-3 text-xl font-bold">{{ $category->name }}</h2>
 
-        document.getElementById('votingForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Votes submitted successfully!');
-            console.log(votes); // Send votes to your backend here
-        });
-    </script>
+            <ul>
+                @foreach ($category->contestants as $contestant)
+                    <li class="flex items-center mb-2 space-x-3">
+                        <!-- Contestant Image -->
+                        @if ($contestant->image_url)
+                            <img src="{{ asset($contestant->image_url) }}" alt="{{ $contestant->name }}"
+                                 class="object-cover w-10 h-10 border rounded-full">
+                        @else
+                            <div class="flex items-center justify-center w-10 h-10 bg-gray-200 border rounded-full">
+                                <span class="text-sm text-gray-500">N/A</span>
+                            </div>
+                        @endif
+
+                        <!-- Contestant Name -->
+                        <span class="text-gray-700">{{ $contestant->name }}</span>
+
+                        <!-- Checkbox for Voting -->
+                        <input type="checkbox" name="vote_{{ $category->id }}[]"
+                               value="{{ $contestant->id }}" class="ml-auto">
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endforeach
+</div>
+
+
+
+
+    <button id="submit-vote" class="px-8 py-4 mt-10 text-xl font-semibold transition-colors duration-200 rounded-lg shadow-md bg-primary text-primary-foreground hover:bg-primary/80">Submit Vote</button>
+  </div>
+
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </body>
+
+<script>
+document.getElementById('submit-vote').addEventListener('click', function() {
+  const categories = document.querySelectorAll('.category-group');
+  const selectedContestants = [];
+  let allCategoriesValid = true;
+
+  categories.forEach(category => {
+    const selectedRadio = category.querySelector('input[type="radio"]:checked');
+    if (!selectedRadio) {
+      allCategoriesValid = false;
+      const categoryName = category.querySelector('h2').textContent;
+      showNotification(`Please select a contestant for the category: ${categoryName}`, 'warning');
+    } else {
+      selectedContestants.push(selectedRadio.value);
+    }
+  });
+
+  if (allCategoriesValid && selectedContestants.length > 0) {
+    fetch('{{ route('submit.vote') }}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({ contestants: selectedContestants })
+    })
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(err => {
+          throw err; // Pass error object
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.success) {
+        showNotification('Your vote has been submitted!', 'success');
+      } else if (data.redirect) {
+        // Redirect the user if the response contains a redirect URL
+        window.location.href = data.redirect;
+      } else {
+        showNotification(data.message || 'Something went wrong. Try again!', 'error');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      if (error.redirect) {
+        window.location.href = error.redirect; // Redirect if error contains redirect
+      } else {
+        showNotification('Error: ' + (error.message || 'Unknown error occurred'), 'error');
+      }
+    });
+  }
+
+  function showNotification(message, type = 'error') {
+  const notification = document.getElementById('notification');
+  const messageElement = document.getElementById('notification-message');
+
+  messageElement.textContent = message;
+  notification.className = `notification ${type}`; // Add the type class
+  notification.style.display = 'block';
+
+  // Auto-hide after 5 seconds
+  setTimeout(() => {
+    hideNotification();
+  }, 5000);
+}
+
+function hideNotification() {
+  const notification = document.getElementById('notification');
+  notification.style.display = 'none';
+}
+
+
+
+
+});
+
+
+</script>
+
 </html>

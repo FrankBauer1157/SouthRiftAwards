@@ -167,6 +167,8 @@ Vote for Your Favorite Contestants
     @endforeach
   </div>
 
+  
+
 
     <button id="submit-vote" class="px-8 py-4 mt-10 text-xl font-semibold transition-colors duration-200 rounded-lg shadow-md bg-primary text-primary-foreground hover:bg-primary/80">Submit Vote</button>
   </div>
