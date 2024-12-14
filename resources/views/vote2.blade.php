@@ -145,7 +145,7 @@ Vote for Your Favorite Contestants
           cursor: pointer;
         }
       </style>
-      
+
 <div class="flex flex-col items-center p-12 bg-white ">
     <img src="{{ asset('SMRA/brandname.png') }}"
          alt="PUMC Logo"
@@ -161,7 +161,7 @@ Vote for Your Favorite Contestants
                     <li class="flex items-center mb-2 space-x-3">
                         <!-- Contestant Image -->
                         @if ($contestant->image_url)
-                            <img src="{{ asset($contestant->image_url) }}" alt="{{ $contestant->name }}"
+                            <img src="drivers/{{ asset($contestant->image_url) }}" alt="{{ $contestant->name }}"
                                  class="object-cover w-10 h-10 border rounded-full">
                         @else
                             <div class="flex items-center justify-center w-10 h-10 bg-gray-200 border rounded-full">
