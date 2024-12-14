@@ -166,7 +166,7 @@ Vote for Your Favorite Contestants
                          alt="{{ $contestant->name }}"
                          class="object-cover w-10 h-10 ml-3 border rounded-full">
                 @else
-                    <img src="{{ asset('images/default.png') }}"
+                    <img src="{{ asset('default.png') }}"
                          alt="Default Image"
                          class="object-cover w-10 h-10 ml-3 border rounded-full">
                 @endif
