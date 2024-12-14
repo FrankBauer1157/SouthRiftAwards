@@ -1,6 +1,6 @@
 <html>
 <head>
-    <meta charset="UTF-8">
+  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Vote for your favorite contestants in the South Rift Matatu Awards-2024. Cast your vote and help decide the winners!">

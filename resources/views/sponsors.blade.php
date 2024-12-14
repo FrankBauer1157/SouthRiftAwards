@@ -2,12 +2,18 @@
 <head>
     <meta charset="UTF-8">
     {{-- meta data --}}
-    <meta name="description" content="SRMA 2024 - Voting">
-    <meta name="keywords" content="SRMA, South Rift Matatu Awards, Kenya, voting, 2024">
-    <meta name="author" content="SRMA Team">
-    <meta name="robots" content="index, follow">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vote for your favorite contestants in the South Rift Matatu Awards-2024. Cast your vote and help decide the winners!">
+    <meta name="keywords" content="Voting, Contestants, Awards, Best Driver, Nominees">
+    <meta name="author" content="Kenda Vin">
+
+    <meta property="og:title" content="Contestants Page">
+    <meta property="og:description" content="Vote for your favorite contestants in the South Rift Matatu Awards-2024!">
+    <meta property="og:image" content="{{ asset('logo.jpeg') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    
     <title>SRMA 2024 - Voting is on!</title>
 
 
