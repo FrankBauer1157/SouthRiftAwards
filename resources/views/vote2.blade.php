@@ -151,39 +151,33 @@ Vote for Your Favorite Contestants
          alt="PUMC Logo"
          class="object-contain w-48 h-48 mb-4 rounded-lg sm:w-64 sm:h-64">
   </div>
-  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
-    @foreach ($categories as $category)
-        <div class="p-4 border rounded-lg shadow-md">
-            <h2 class="mb-3 text-xl font-bold">{{ $category->name }}</h2>
-
-            <ul>
-                @foreach ($category->contestants as $contestant)
-                    <li class="flex items-center mb-2 space-x-3">
-                        <!-- Contestant Image -->
-                        @if ($contestant->image_url)
-                        <img src="{{ asset('drivers/' . $contestant->image_url) }}"
-                             alt="{{ $contestant->name }}"
-                             class="object-cover w-10 h-10 border rounded-full">
-                    @else
-                        <!-- Default Image -->
-                        <img src="{{ asset('default.png') }}"
-                             alt="Default Image"
-                             class="object-cover w-10 h-10 border rounded-full">
-                    @endif
-
-
-                        <!-- Contestant Name -->
-                        <span class="text-gray-700">{{ $contestant->name }}</span>
-
-                        <!-- Checkbox for Voting -->
-                        <input type="checkbox" name="vote_{{ $category->id }}[]"
-                               value="{{ $contestant->id }}" class="ml-auto">
-                    </li>
-                @endforeach
-            </ul>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+    @foreach($categories as $category)
+    <div class="p-4 transition-transform transform rounded-lg shadow-lg category-group bg-card hover:scale-105 hover:shadow-2xl">
+        <h2 class="mb-4 text-xl font-semibold text-primary md:text-2xl">{{ $category->name }}</h2>
+        <div class="grid grid-cols-1 gap-3">
+            @foreach($category->contestants as $contestant)
+            <label class="flex items-center">
+                <input type="radio" class="w-5 h-5 rounded form-radio text-primary border-primary focus:ring focus:ring-primary/50"
+                       name="contestants[{{ $category->id }}]"
+                       value="{{ $contestant->id }}">
+                @if ($contestant->image_url)
+                    <img src="{{ asset('drivers/' . $contestant->image_url) }}"
+                         alt="{{ $contestant->name }}"
+                         class="object-cover w-10 h-10 ml-3 border rounded-full">
+                @else
+                    <img src="{{ asset('images/default.png') }}"
+                         alt="Default Image"
+                         class="object-cover w-10 h-10 ml-3 border rounded-full">
+                @endif
+                <span class="ml-4 text-sm font-medium md:text-base">{{ $contestant->name }}</span>
+            </label>
+            @endforeach
         </div>
+    </div>
     @endforeach
 </div>
+
 
 
 
