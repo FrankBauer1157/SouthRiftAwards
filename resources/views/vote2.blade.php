@@ -161,13 +161,16 @@ Vote for Your Favorite Contestants
                     <li class="flex items-center mb-2 space-x-3">
                         <!-- Contestant Image -->
                         @if ($contestant->image_url)
-                            <img src="drivers/{{ asset($contestant->image_url) }}" alt="{{ $contestant->name }}"
-                                 class="object-cover w-10 h-10 border rounded-full">
-                        @else
-                            <div class="flex items-center justify-center w-10 h-10 bg-gray-200 border rounded-full">
-                                <span class="text-sm text-gray-500">N/A</span>
-                            </div>
-                        @endif
+                        <img src="{{ asset('drivers/' . $contestant->image_url) }}"
+                             alt="{{ $contestant->name }}"
+                             class="object-cover w-10 h-10 border rounded-full">
+                    @else
+                        <!-- Default Image -->
+                        <img src="{{ asset('images/default.png') }}"
+                             alt="Default Image"
+                             class="object-cover w-10 h-10 border rounded-full">
+                    @endif
+
 
                         <!-- Contestant Name -->
                         <span class="text-gray-700">{{ $contestant->name }}</span>
