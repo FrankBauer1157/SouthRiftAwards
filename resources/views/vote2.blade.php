@@ -166,7 +166,7 @@ Vote for Your Favorite Contestants
                              class="object-cover w-10 h-10 border rounded-full">
                     @else
                         <!-- Default Image -->
-                        <img src="{{ asset('images/default.png') }}"
+                        <img src="{{ asset('default.png') }}"
                              alt="Default Image"
                              class="object-cover w-10 h-10 border rounded-full">
                     @endif
