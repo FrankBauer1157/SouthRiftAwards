@@ -50,7 +50,12 @@
                             A heartfelt thank you to all our sponsors for their invaluable support and commitment to the success of the South-Rift Matatu Awards 2024!
                         </p>
                     </section>
-
+                    
+                    <div class="flex flex-col items-center p-12 bg-white">
+                        <img src="{{ asset('logo.jpeg') }}"
+                             alt="PUMC Logo"
+                             class="object-contain w-64 h-64 mb-4 rounded-lg sm:w-80 sm:h-80 md:w-96 md:h-96">
+                      </div>
             <!-- Sponsors Grid -->
             <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 <!-- Sponsor Card -->
