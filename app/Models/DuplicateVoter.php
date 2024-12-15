@@ -18,5 +18,6 @@ class DuplicateVoter extends Model
         'country',
         'city' ,
         'region',
+        'vote_count',
     ];
 }
