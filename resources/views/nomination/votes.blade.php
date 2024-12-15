@@ -37,7 +37,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Contestant</th>
+                                <th></th>
                                 <th>Contestant</th>
                                 <th>Votes</th>
                                 <th>Status</th>
