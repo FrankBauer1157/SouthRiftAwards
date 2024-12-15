@@ -62,7 +62,7 @@ class NominationController extends Controller
         }])->get();
 
 
-        return view('nomination.votes', compact('categoriesWithNominations','categories'));
+        return view('nomination.votes', compact('categoriesWithVotes',));
     }
 
 
