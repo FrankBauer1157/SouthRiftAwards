@@ -182,6 +182,7 @@
             <a href="{{ route('categories.create') }}">Add Category</a>
             <a href="{{ route('nomination.create') }}">Nominate</a>
             <a href="{{ route('nominations.admin') }}">Admin View</a>
+            <a href="{{ route('nominations.votes') }}">Live Voting</a>
             <a href="{{ route('vote.index') }}">Votes</a>
             <a href="#">Contestants</a>
             <a href="{{ route('logout') }}">Logout</a>

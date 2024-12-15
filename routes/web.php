@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/nominations/admin', [NominationController::class, 'adminView'])->name('nominations.admin'); // Admin view
     Route::get('/nomination', [NominationController::class, 'create'])->name('nomination.create');
+    Route::get('/nomination/votes', [NominationController::class, 'votes'])->name('nomination.votes');
 });
 
 // Public routes

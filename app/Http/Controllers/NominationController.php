@@ -51,6 +51,19 @@ class NominationController extends Controller
 
         return view('nomination.contestants', compact('categoriesWithNominations','categories'));
     }
+    public function votes()
+    {
+        // Fetch categories with their nominations
+        $categoriesWithVotes = Category::with(['contestants' => function($query) {
+            $query->select('contestants.id', 'contestants.name', 'contestants.image_url', 'contestants.category_id')
+                  ->selectRaw('COUNT(votes.id) as vote_count') // Count votes for each contestant
+                  ->leftJoin('votes', 'contestants.id', '=', 'votes.contestant_id') // Join votes table
+                  ->groupBy('contestants.id'); // Group by contestant
+        }])->get();
+
+
+        return view('nomination.votes', compact('categoriesWithNominations','categories'));
+    }
 
 
 
