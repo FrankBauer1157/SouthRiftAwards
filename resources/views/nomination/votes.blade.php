@@ -38,6 +38,7 @@
                         <thead>
                             <tr>
                                 <th>Contestant</th>
+                                <th>Contestant</th>
                                 <th>Votes</th>
                                 <th>Status</th>
                             </tr>
@@ -45,6 +46,15 @@
                         <tbody>
                             @foreach ($category->contestants as $contestant)
                                 <tr>
+                                    <td>      @if ($contestant->image_url)
+                                        <img src="{{ asset('drivers/' . $contestant->image_url) }}"
+                                             alt="{{ $contestant->name }}"
+                                             class="object-cover w-10 h-10 ml-3 border rounded-full">
+                                    @else
+                                        <img src="{{ asset('default.png') }}"
+                                             alt="Default Image"
+                                             class="object-cover w-10 h-10 ml-3 border rounded-full">
+                                    @endif</td>
                                     <td>{{ $contestant->name }}</td>
                                     <td>{{ $contestant->vote_count }}</td>
                                     <td>{{ $contestant->vote_count > 0 ? 'Voted' : 'Not Voted' }}</td>
