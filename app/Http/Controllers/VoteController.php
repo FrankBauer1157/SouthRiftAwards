@@ -130,16 +130,21 @@ public function submitVote(Request $request)
             $region = $location['region'] ?? null;
             $city = $location['city'] ?? null;
 
-            // Log duplicate voter attempt
-            DuplicateVoter::create([
-                'ip_address' => $ip,
-                'mac_address' => $ip, // Assuming IP in place of MAC
-                'user_agent' => $request->userAgent(),
-                'user_id' => 0 ?? null,
-                'country' => $country,
-                'region' => $region,
-                'city' => $city,
-            ]);
+       // Log duplicate voter attempt or update the vote_count if record exists
+                DuplicateVoter::updateOrCreate(
+                    [
+                        'ip_address' => $ip, // Match based on IP address (or IP + user_agent for stricter matching)
+                    ],
+                    [
+                        'mac_address' => $ip, // Assuming IP in place of MAC
+                        'user_agent' => $request->userAgent(),
+                        'user_id' => $userId ?? null, // Replace with actual user ID if available
+                        'country' => $country,
+                        'region' => $region,
+                        'city' => $city,
+                    ]
+                )->increment('vote_count', 1);
+
 
             // Flash message for the user
             session()->flash('message', 'You have already voted! Please note that you can only vote once. Thank you for your participation.');
