@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vote;
-use App\Models\Nominee;
+use App\Models\DuplicateVoter;
 use App\Models\VoteUserInfo;
 use App\Models\Category;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
 
 class VoteController extends Controller
 {
@@ -104,99 +105,7 @@ public function store(Request $request)
         // return view('vote', compact('categories'));
     }
 
-public function submitVotex(Request $request)
-{
-    // Validation (ensure only one vote per identifier)
-    $request->validate([
-        'nominee_id' => 'required|exists:nominees,id',
-        'identifier' => 'required|unique:votes,identifier',
-    ]);
 
-    // Store the vote
-    Vote::create([
-        'nominee_id' => $request->nominee_id,
-        'identifier' => $request->identifier,
-    ]);
-
-    return redirect()->route('vote.form')->with('success', 'Your vote has been cast!');
-}
-
-public function submitVoteccc(Request $request)
-{
-    $validated = $request->validate([
-        'contestants' => 'required|array',
-        'contestants.*' => 'exists:contestants,id',
-    ]);
-
-    // Check if the user has already voted by IP/MAC address
-    $userInfo = VoteUserInfo::where('ip_address', $request->ip())
-        ->orWhere('mac_address', $request->mac_address)
-        ->first();
-
-    if ($userInfo) {
-        return response()->json(['success' => false, 'message' => 'You have already voted'], 400);
-    }
-
-    // Store user info in voters_user_info table
-    $userInfo = new VoteUserInfo;
-    $userInfo->ip_address = $request->ip();
-    $userInfo->mac_address = $request->mac_address;
-    $userInfo->user_Agent = $request->userAgent();
-    $userInfo->user_id = 1;
-    $userInfo->save();
-
-    // Store votes in the votes table
-    foreach ($request->contestants as $contestantId) {
-        Vote::create([
-            'contestant_id' => $contestantId,
-            'user_info_id' => $userInfo->id,
-            'category_id' => 0, // Assuming you have the category ID
-        ]);
-    }
-
-    return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
-}
-
-public function submitVoteeee(Request $request)
-{
-    $validated = $request->validate([
-        'contestants' => 'required|array',
-        'contestants.*' => 'exists:contestants,id', // assuming contestants table
-    ]);
-
-    // Check if the user has already voted by IP/MAC address
-    $userInfo = VoteUserInfo::where('ip_address', $request->ip())
-        ->orWhere('mac_address', $request->mac_address)
-        ->first();
-
-    if ($userInfo) {
-        // Return a JSON response with a redirect URL
-        return response()->json([
-            'success' => false,
-            'redirect' => route('sponsors'),
-            'message' => 'You have already voted!'
-        ], 400);
-    }
-
-    // Store user info in voters_user_info table
-    $userInfo = new VoteUserInfo;
-    $userInfo->ip_address = $request->ip();
-    $userInfo->mac_address = $request->ip(); // Assuming you store IP in place of MAC
-    $userInfo->user_Agent = $request->userAgent();
-    $userInfo->user_id = 1;
-    $userInfo->save();
-
-    // Store votes in the votes table
-    foreach ($request->contestants as $contestantId) {
-        Vote::create([
-            'contestant_id' => $contestantId,
-            'user_info_id' => $userInfo->id,
-            'category_id' => 0,
-        ]);
-    }
-
-    return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
-}
 
 public function submitVote(Request $request)
 {
@@ -210,22 +119,66 @@ public function submitVote(Request $request)
         ->orWhere('mac_address', $request->mac_address)
         ->first();
 
-    if ($userInfo) {
-        // Use Laravel's session to store the message
-        session()->flash('message', 'You have already voted! Please note that you can only vote once.Thank you for your participation.');
-        return response()->json([
-            'success' => false,
-            'redirect' => route('sponsors'),
-        ], 400);
-    }
+        if ($userInfo) {
+            // Use the IPinfo API to fetch geolocation details
+            $ip = $request->ip();
+            $ipInfoToken = '9c75c23af5c9fd'; // Replace with your IPinfo API token
+            $location = Http::get("https://ipinfo.io/{$ip}?token={$ipInfoToken}")->json();
+
+            // Extract location data
+            $country = $location['country'] ?? null;
+            $region = $location['region'] ?? null;
+            $city = $location['city'] ?? null;
+
+            // Log duplicate voter attempt
+            DuplicateVoter::create([
+                'ip_address' => $ip,
+                'mac_address' => $ip, // Assuming IP in place of MAC
+                'user_agent' => $request->userAgent(),
+                'user_id' => 0 ?? null,
+                'country' => $country,
+                'region' => $region,
+                'city' => $city,
+            ]);
+
+            // Flash message for the user
+            session()->flash('message', 'You have already voted! Please note that you can only vote once. Thank you for your participation.');
+
+            return response()->json([
+                'success' => false,
+                'redirect' => route('sponsors'),
+            ], 400);
+        }
+
 
     // Store user info in voters_user_info table
+    $ipAddress = $request->ip();
+
+    // Call IPinfo API for geolocation data
+    $ipInfoToken = '9c75c23af5c9fd'; // Replace with your IPinfo API token
+    $ipInfoUrl = "https://ipinfo.io/{$ipAddress}/json?token={$ipInfoToken}";
+
+    $response = Http::get($ipInfoUrl);
+    $geoData = $response->json();
+
+    // Extract city, region, and country from the API response
+    $city = $geoData['city'] ?? 'Unknown';
+    $region = $geoData['region'] ?? 'Unknown';
+    $country = $geoData['country'] ?? 'Unknown';
+
+    // Save data into the database
     $userInfo = new VoteUserInfo;
-    $userInfo->ip_address = $request->ip();
-    $userInfo->mac_address = $request->ip(); // Assuming you store IP in place of MAC
+    $userInfo->ip_address = $ipAddress;
+    $userInfo->mac_address = $ipAddress; // Storing IP in place of MAC
     $userInfo->user_Agent = $request->userAgent();
-    $userInfo->user_id = 1;
+    $userInfo->user_id = 1; // Replace with the actual user_id
+    $userInfo->city = $city;
+    $userInfo->region = $region;
+    $userInfo->country = $country;
     $userInfo->save();
+
+
+
 
     // Store votes in the votes table
     foreach ($request->contestants as $contestantId) {
