@@ -57,7 +57,7 @@
                                     @endif</td>
                                     <td>{{ $contestant->name }}</td>
                                     <td>{{ $contestant->vote_count }}</td>
-                                    <td>{{ $contestant->vote_count > 0 ? 'Voted' : 'Not Voted' }}</td>
+                                    <td>{{ $contestant->vote_count > 0 ? 'Active' : 'Not Voted' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
