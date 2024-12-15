@@ -60,7 +60,9 @@ class NominationController extends Controller
                   ->leftJoin('votes', 'contestants.id', '=', 'votes.contestant_id') // Join votes table
                   ->groupBy('contestants.id') // Group by contestant
                   ->orderByRaw('COUNT(votes.id) DESC'); // Order by the number of votes in descending order
-        }])->get();
+        }])
+        ->where('status', 'active') // Only get categories with status 'active'
+        ->get();
 
 
 
