@@ -58,8 +58,16 @@ class NominationController extends Controller
             $query->select('contestants.id', 'contestants.name', 'contestants.image_url', 'contestants.category_id')
                   ->selectRaw('COUNT(votes.id) as vote_count') // Count votes for each contestant
                   ->leftJoin('votes', 'contestants.id', '=', 'votes.contestant_id') // Join votes table
-                  ->groupBy('contestants.id'); // Group by contestant
+                  ->groupBy('contestants.id') // Group by contestant
+                  ->orderByRaw('COUNT(votes.id) DESC'); // Order by the number of votes in descending order
         }])->get();
+
+
+        $categoriesWithVotes = Category::with(['contestants' => function($query) {
+            $query->select('id', 'name', 'vote_count') // Ensure the vote_count is selected
+                  ->orderByDesc('vote_count'); // Sort contestants by vote_count in descending order
+        }])->get();
+
 
 
         return view('nomination.votes', compact('categoriesWithVotes',));
