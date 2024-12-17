@@ -448,15 +448,21 @@ public function submitVoteOpenWindow(Request $request)
             // Flash message for the frontend
             session()->flash('message', 'You had already voted earlier, but your vote will still count during this window.');
 
-            // Redirect to the sponsors page
-            return redirect()->route('sponsors');
+            // Return JSON response with redirect URL
+            return response()->json([
+                'success' => true,
+                'redirect' => route('sponsors'),
+            ]);
         }
 
         // If voting is outside the allowed window
         session()->flash('message', 'You have already voted! Please note that you can only vote once. Thank you for your participation.');
 
-        // Redirect to the sponsors page
-        return redirect()->route('sponsors');
+        // Return JSON response with redirect URL
+        return response()->json([
+            'success' => false,
+            'redirect' => route('sponsors'),
+        ], 400);
     }
 
     // If the user hasn't voted yet, save their vote info
@@ -482,8 +488,11 @@ public function submitVoteOpenWindow(Request $request)
     // Flash message thanking the user for participating
     session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2024.');
 
-    // Redirect to the sponsors page
-    return redirect()->route('sponsors');
+    // Return JSON response with redirect URL
+    return response()->json([
+        'success' => true,
+        'redirect' => route('sponsors'),
+    ]);
 }
 
 
