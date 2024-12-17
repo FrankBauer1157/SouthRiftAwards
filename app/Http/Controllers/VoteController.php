@@ -347,7 +347,7 @@ public function submitVoteOpenWindowx(Request $request)
     ]);
 }
 
-public function submitVoteOpenWindowcc(Request $request)
+public function submitVoteOpenWindow(Request $request)
 {
     $validated = $request->validate([
         'contestants' => 'required|array',
@@ -417,7 +417,7 @@ public function submitVoteOpenWindowcc(Request $request)
     ]);
 }
 
-public function submitVoteOpenWindow(Request $request)
+public function submitVoteOpenWindowcc(Request $request)
 {
     $validated = $request->validate([
         'contestants' => 'required|array',
