@@ -59,7 +59,7 @@ class VoteController extends Controller
 {
     $categories = Category::where('status', 'active')->get();
     // $categories = Category::with('contestants')->get();
-    return view('vote', compact('categories'));
+    return view('vote2', compact('categories'));
 
 }
 public function index2()
@@ -101,7 +101,7 @@ public function store(Request $request)
     public function showVotingForm()
     {
         $categories = Category::where('status', 'active')->with('contestants')->get();
-    return view('vote', compact('categories'));
+    return view('vote2', compact('categories'));
         // return view('vote', compact('categories'));
     }
 
