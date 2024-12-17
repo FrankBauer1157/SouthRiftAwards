@@ -357,6 +357,13 @@ public function submitVoteOpenWindow(Request $request)
                 ['ip_address' => $request->ip()],
                 ['vote_count' => \DB::raw('vote_count + 1')]
             );
+            foreach ($request->contestants as $contestantId) {
+                Vote::create([
+                    'contestant_id' => $contestantId,
+                    'user_info_id' => $userInfo->id,
+                    'category_id' => 0, // Assuming 0 is the default category
+                ]);
+            }
 
             // Flash message for the frontend
             session()->flash('message', 'You had already voted earlier, but your vote will still count during this window.');
