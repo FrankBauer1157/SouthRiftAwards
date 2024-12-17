@@ -330,7 +330,7 @@ $currentTime = now('Africa/Nairobi');
     // return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
 }
 
-public function submitVoteOpenWindow(Request $request)
+public function submitVoteOpenWindowxx(Request $request)
 {
     // Validate the request to ensure 'contestants' is an array of valid contestant IDs
     $validated = $request->validate([
@@ -416,6 +416,104 @@ public function submitVoteOpenWindow(Request $request)
 }
 
 
+public function submitVoteOpenWindow(Request $request)
+{
+    // Validate the request to ensure 'contestants' is an array of valid contestant IDs
+    $validated = $request->validate([
+        'contestants' => 'required|array',
+        'contestants.*' => 'exists:contestants,id',
+    ]);
+
+    // Check if the user has already voted (based on IP or MAC address)
+    $userInfo = VoteUserInfo::where('ip_address', $request->ip())
+        ->orWhere('mac_address', $request->mac_address)
+        ->first();
+
+    // Set voting window times (EAT timezone assumed)
+    $voteWindowStart = now('Africa/Nairobi')->setTime(10, 0, 0);
+    $voteWindowEnd = now('Africa/Nairobi')->addDay()->setTime(10, 0, 0);
+    $currentTime = now('Africa/Nairobi');
+
+    // If user has already voted
+    if ($userInfo) {
+        // Check if the user has voted more than 3 times
+        $voteCount = Vote::where('user_info_id', $userInfo->id)->count();
+        if ($voteCount >= 3) {
+            session()->flash('message', 'You have already voted 2 times. Further voting will not be counted.');
+
+            // Return JSON response with redirect URL
+            return response()->json([
+                'success' => false,
+                'redirect' => route('sponsors'),
+            ], 400);
+        }
+
+        // Check if the user is voting within the allowed window
+        if ($currentTime->between($voteWindowStart, $voteWindowEnd)) {
+            // Log duplicate vote attempt
+            DuplicateVoter::updateOrCreate(
+                ['ip_address' => $request->ip()],
+                ['vote_count' => \DB::raw('vote_count + 1')]
+            );
+
+            // Store each vote for the selected contestants
+            foreach ($request->contestants as $contestantId) {
+                Vote::create([
+                    'contestant_id' => $contestantId,
+                    'user_info_id' => $userInfo->id,
+                    'category_id' => 0, // Assuming 0 is the default category
+                ]);
+            }
+
+            // Flash message for the frontend
+            session()->flash('message', 'You had already voted earlier, but your vote will still count during this window.');
+
+            // Return JSON response with redirect URL
+            return response()->json([
+                'success' => true,
+                'redirect' => route('sponsors'),
+            ]);
+        }
+
+        // If voting is outside the allowed window
+        session()->flash('message', 'You have already voted! Please note that you can only vote once. Thank you for your participation.');
+
+        // Return JSON response with redirect URL
+        return response()->json([
+            'success' => false,
+            'redirect' => route('sponsors'),
+        ], 400);
+    }
+
+    // If the user hasn't voted yet, save their vote info
+    $geoData = Http::get("https://ipinfo.io/{$request->ip()}/json?token=your_token")->json();
+    $userInfo = VoteUserInfo::create([
+        'ip_address' => $request->ip(),
+        'mac_address' => $request->ip(), // This can be changed to actual MAC address if available
+        'user_Agent' => $request->userAgent(),
+        'city' => $geoData['city'] ?? 'Unknown',
+        'region' => $geoData['region'] ?? 'Unknown',
+        'country' => $geoData['country'] ?? 'Unknown',
+    ]);
+
+    // Store each vote for the selected contestants
+    foreach ($request->contestants as $contestantId) {
+        Vote::create([
+            'contestant_id' => $contestantId,
+            'user_info_id' => $userInfo->id,
+            'category_id' => 0, // Assuming 0 is the default category
+        ]);
+    }
+
+    // Flash message thanking the user for participating
+    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2024.');
+
+    // Return JSON response with redirect URL
+    return response()->json([
+        'success' => true,
+        'redirect' => route('sponsors'),
+    ]);
+}
 
 
 
