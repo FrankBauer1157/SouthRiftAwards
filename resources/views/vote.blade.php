@@ -181,8 +181,8 @@ Vote for Your Favorite Contestants
 
 
 
-
-    <button id="submit-vote" class="px-8 py-4 mt-10 text-xl font-semibold transition-colors duration-200 rounded-lg shadow-md bg-primary text-primary-foreground hover:bg-primary/80">Submit Vote</button>
+<label class="px-8 py-4 mt-10 text-xl font-semibold transition-colors duration-200 rounded-lg shadow-md bg-primary text-primary-foreground hover:bg-primary/80">Under Maintainace, come back in 10</label>
+    {{-- <button id="submit-vote" class="px-8 py-4 mt-10 text-xl font-semibold transition-colors duration-200 rounded-lg shadow-md bg-primary text-primary-foreground hover:bg-primary/80">Submit Vote</button> --}}
   </div>
 
   <meta name="csrf-token" content="{{ csrf_token() }}">

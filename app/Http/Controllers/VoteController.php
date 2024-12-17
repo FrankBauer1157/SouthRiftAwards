@@ -281,7 +281,7 @@ public function x(Request $request)
     return redirect()->route('sponsors');
 }
 
-public function submitVoteOpenWindow(Request $request)
+public function submitVoteOpenWindowx(Request $request)
 {
     $validated = $request->validate([
         'contestants' => 'required|array',
@@ -343,6 +343,74 @@ public function submitVoteOpenWindow(Request $request)
     return response()->json([
         'success' => true,
         'message' => 'Thank you for participating in South-Rift Matatu Awards - 2024.',
+        'redirect' => route('sponsors'),
+    ]);
+}
+
+public function submitVoteOpenWindow(Request $request)
+{
+    $validated = $request->validate([
+        'contestants' => 'required|array',
+        'contestants.*' => 'exists:contestants,id',
+    ]);
+
+    // Check if the user has already voted
+    $userInfo = VoteUserInfo::where('ip_address', $request->ip())
+        ->orWhere('mac_address', $request->mac_address)
+        ->first();
+
+    $voteWindowStart = now()->setTime(10, 0, 0);
+    $voteWindowEnd = now()->addDay()->setTime(10, 0, 0);
+    $currentTime = now();
+
+    if ($userInfo) {
+        // If user votes within window
+        if ($currentTime->between($voteWindowStart, $voteWindowEnd)) {
+            // Log duplicate vote attempt
+            DuplicateVoter::updateOrCreate(
+                ['ip_address' => $request->ip()],
+                ['vote_count' => \DB::raw('vote_count + 1')]
+            );
+
+            // Flash message and redirect
+            session()->flash('message', 'You had already voted earlier, but your vote will still count during this window.');
+            return response()->json([
+                'success' => true,
+                'redirect' => route('sponsors'),
+            ]);
+        }
+
+        // Block vote outside the window
+        session()->flash('message', 'You have already voted. Please wait for the next voting window.');
+        return response()->json([
+            'success' => false,
+            'redirect' => route('sponsors'),
+        ], 400);
+    }
+
+    // Save user info and store votes
+    $geoData = Http::get("https://ipinfo.io/{$request->ip()}/json?token=your_token")->json();
+    $userInfo = VoteUserInfo::create([
+        'ip_address' => $request->ip(),
+        'mac_address' => $request->ip(),
+        'user_Agent' => $request->userAgent(),
+        'city' => $geoData['city'] ?? 'Unknown',
+        'region' => $geoData['region'] ?? 'Unknown',
+        'country' => $geoData['country'] ?? 'Unknown',
+    ]);
+
+    foreach ($request->contestants as $contestantId) {
+        Vote::create([
+            'contestant_id' => $contestantId,
+            'user_info_id' => $userInfo->id,
+            'category_id' => 0,
+        ]);
+    }
+
+    // Flash message and redirect
+    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2024.');
+    return response()->json([
+        'success' => true,
         'redirect' => route('sponsors'),
     ]);
 }
