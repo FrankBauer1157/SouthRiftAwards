@@ -202,6 +202,7 @@ public function submitVote(Request $request)
     // return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
 }
 
+
 public function submitVoteOpenWindow(Request $request)
 {
     $validated = $request->validate([
@@ -227,10 +228,7 @@ public function submitVoteOpenWindow(Request $request)
         if ($previousVote->last_voted_at && $previousVote->last_voted_at->between($today10AM, $tomorrow10AM)) {
             // User already voted in the current window
             session()->flash('message', 'You have already voted in this session. Please wait for the next voting window.');
-            return response()->json([
-                'success' => false,
-                'message' => 'Duplicate vote detected. You can only vote once during this window.',
-            ], 400);
+            return redirect()->route('sponsors');
         }
 
         // User voted earlier outside the window, but allow them to vote
@@ -276,12 +274,9 @@ public function submitVoteOpenWindow(Request $request)
     }
 
     session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2024. Your vote has been counted.');
-    return response()->json([
-        'success' => true,
-        'redirect' => route('sponsors'),
-        'message' => 'Your vote has been successfully submitted.',
-    ], 200);
+    return redirect()->route('sponsors');
 }
+
 
 
 
