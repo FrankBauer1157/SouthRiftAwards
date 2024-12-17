@@ -439,7 +439,7 @@ public function submitVoteOpenWindow(Request $request)
         // Check if the user has voted more than 3 times
         $voteCount = Vote::where('user_info_id', $userInfo->id)->count();
         if ($voteCount >= 3) {
-            session()->flash('message', 'You have already voted 2 times. Further voting will not be counted.');
+            session()->flash('message', 'You have already voted more than 2 times. Further voting will not be counted.');
 
             // Return JSON response with redirect URL
             return response()->json([
