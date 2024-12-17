@@ -26,13 +26,13 @@
             ">
                 SOUTH-RIFT MATATU AWARDS - 2024
             </h3>
-            <p class="mt-4 text-lg text-gray-200">
-                @if(session('message'))
-                <div class="alert alert-info">
-                  {{ session('message') }}
-                </div>
-              @endif
-            </p>
+           @if(session('message'))
+            <div class="p-4 mt-4 text-white bg-blue-500 rounded-lg shadow-md">
+                {{ session('message') }}
+            </div>
+        @endif
+
+
         </header>
 
 
