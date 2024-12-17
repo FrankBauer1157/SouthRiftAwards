@@ -59,8 +59,8 @@ Route::get('/categories/{id}/nominations', [CategoryController::class, 'getNomin
 
 Route::get('/vote', [VoteController::class, 'index'])->name('vote.index');
 Route::post('/vote', [VoteController::class, 'store'])->name('vote.store');
-//Route::post('/submit-vote', [VoteController::class, 'submitVote'])->name('submit.vote');
-Route::post('/submit-vote', [VoteController::class, 'submitVoteOpenWindow'])->name('submit.vote');
+Route::post('/submit-vote', [VoteController::class, 'submitVote'])->name('submit.vote');
+//Route::post('/submit-vote', [VoteController::class, 'submitVoteOpenWindow'])->name('submit.vote');
 
 
 
