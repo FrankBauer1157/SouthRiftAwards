@@ -193,7 +193,7 @@ public function submitVote(Request $request)
             'category_id' => 0,
         ]);
     }
-    session()->flash('message', 'Thank you for perticipating in South-Rift Matatu Awards - 2024.');
+    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2024.');
         return response()->json([
             'success' => false,
             'redirect' => route('sponsors'),
