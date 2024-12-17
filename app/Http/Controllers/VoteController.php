@@ -202,6 +202,86 @@ public function submitVote(Request $request)
     // return response()->json(['success' => true, 'message' => 'Your vote has been submitted!'], 200);
 }
 
+public function submitVoteOpenWindow(Request $request)
+{
+    $validated = $request->validate([
+        'contestants' => 'required|array',
+        'contestants.*' => 'exists:contestants,id',
+    ]);
+
+    // Get user details
+    $ipAddress = $request->ip();
+    $macAddress = $request->mac_address;
+
+    // Define voting window (Today 10 AM to Tomorrow 10 AM)
+    $today10AM = now()->startOfDay()->addHours(10); // Today 10:00 AM
+    $tomorrow10AM = $today10AM->copy()->addDay();   // Tomorrow 10:00 AM
+
+    // Check if user has ever voted before
+    $previousVote = DuplicateVoter::where('ip_address', $ipAddress)
+        ->orWhere('mac_address', $macAddress)
+        ->first();
+
+    if ($previousVote) {
+        // Check if the user has already voted in the current window
+        if ($previousVote->last_voted_at && $previousVote->last_voted_at->between($today10AM, $tomorrow10AM)) {
+            // User already voted in the current window
+            session()->flash('message', 'You have already voted in this session. Please wait for the next voting window.');
+            return response()->json([
+                'success' => false,
+                'message' => 'Duplicate vote detected. You can only vote once during this window.',
+            ], 400);
+        }
+
+        // User voted earlier outside the window, but allow them to vote
+        session()->flash('message', 'You had already voted earlier, but we are counting this vote as it falls within the voting window.');
+    }
+
+    // Call IPinfo API for geolocation data
+    $ipInfoToken = '9c75c23af5c9fd';
+    $geoData = Http::get("https://ipinfo.io/{$ipAddress}?token={$ipInfoToken}")->json();
+    $city = $geoData['city'] ?? 'Unknown';
+    $region = $geoData['region'] ?? 'Unknown';
+    $country = $geoData['country'] ?? 'Unknown';
+
+    // Log or update the voter's info in duplicate_voters table
+    DuplicateVoter::updateOrCreate(
+        ['ip_address' => $ipAddress, 'mac_address' => $macAddress],
+        [
+            'user_agent' => $request->userAgent(),
+            'city' => $city,
+            'region' => $region,
+            'country' => $country,
+            'last_voted_at' => now(), // Update the voting time
+        ]
+    );
+
+    // Save the user's info
+    $userInfo = VoteUserInfo::create([
+        'ip_address' => $ipAddress,
+        'mac_address' => $macAddress,
+        'user_agent' => $request->userAgent(),
+        'city' => $city,
+        'region' => $region,
+        'country' => $country,
+    ]);
+
+    // Store votes in the votes table
+    foreach ($request->contestants as $contestantId) {
+        Vote::create([
+            'contestant_id' => $contestantId,
+            'user_info_id' => $userInfo->id,
+            'category_id' => 0, // Replace with the actual category_id
+        ]);
+    }
+
+    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2024. Your vote has been counted.');
+    return response()->json([
+        'success' => true,
+        'message' => 'Your vote has been successfully submitted.',
+    ], 200);
+}
+
 
 
 }
