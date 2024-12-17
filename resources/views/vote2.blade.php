@@ -224,7 +224,8 @@ document.getElementById('submit-vote').addEventListener('click', function() {
     })
     .then(data => {
       if (data.success) {
-        showNotification('Your vote has been submitted!', 'success');
+        showNotification(data.message , 'success');
+        window.location.href = data.redirect;
       } else if (data.redirect) {
         // Redirect the user if the response contains a redirect URL
         window.location.href = data.redirect;
