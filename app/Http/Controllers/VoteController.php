@@ -278,6 +278,7 @@ public function submitVoteOpenWindow(Request $request)
     session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2024. Your vote has been counted.');
     return response()->json([
         'success' => true,
+        'redirect' => route('sponsors'),
         'message' => 'Your vote has been successfully submitted.',
     ], 200);
 }
