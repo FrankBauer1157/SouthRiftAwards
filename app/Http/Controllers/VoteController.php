@@ -381,7 +381,9 @@ public function submitVoteOpenWindow(Request $request)
         }
 
         // Block vote outside the window
-        session()->flash('message', 'You have already voted. Please wait for the next voting window.');
+        // session()->flash('message', 'You have already voted. Please wait for the next voting window.');
+        session()->flash('message', 'You have already voted! Thank you for your participation.');
+
         return response()->json([
             'success' => false,
             'redirect' => route('sponsors'),
