@@ -4,303 +4,393 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>South Rift Matatu Awards 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a237e;
+            --secondary: #d32f2f;
+            --accent: #ffc107;
+            --light: #f5f5f5;
+            --dark: #212121;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(135deg, var(--primary), #283593);
+            color: var(--light);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
         }
 
-        .poster {
-            width: 800px;
-            height: 1200px;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        .container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .header {
             text-align: center;
-            padding: 40px 20px 20px;
-            background: rgba(0,0,0,0.7);
             margin-bottom: 30px;
+            width: 100%;
         }
 
-        .year-2021 {
-            color: #ffd700;
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 5px solid white;
+        }
+
+        .logo i {
+            font-size: 50px;
+            color: var(--primary);
+        }
+
+        .title {
             font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .main-title {
-            color: white;
-            font-size: 68px;
             font-weight: 900;
             text-transform: uppercase;
-            line-height: 1;
-            margin: 10px 0;
-            text-shadow: 3px 3px 0 #000;
             letter-spacing: 2px;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .matatu-text {
-            color: #ffd700;
-            font-size: 76px;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin: 5px 0;
-            text-shadow: 3px 3px 0 #000;
+        .subtitle {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--accent);
         }
 
-        .awards-2025 {
+        .edition {
+            background: var(--secondary);
             color: white;
-            font-size: 52px;
+            padding: 8px 25px;
+            border-radius: 30px;
+            font-size: 18px;
             font-weight: bold;
-            text-transform: uppercase;
-            margin: 10px 0;
-            text-shadow: 2px 2px 0 #000;
+            display: inline-block;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
         }
 
-        .edition-badge {
-            background: #ffd700;
-            color: #b21f1f;
-            padding: 8px 30px;
-            border-radius: 30px;
+        .patron-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            width: 100%;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .patron-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .patron-name {
             font-size: 24px;
             font-weight: bold;
-            display: inline-block;
-            margin: 15px 0;
-            transform: rotate(-5deg);
-            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
-        }
-
-        .category {
-            text-align: center;
-            margin: 40px 0;
-            padding: 0 20px;
-        }
-
-        .category-title {
             color: white;
-            font-size: 42px;
-            font-weight: 800;
-            text-transform: uppercase;
-            background: rgba(178, 31, 31, 0.9);
-            padding: 15px 40px;
-            border-radius: 50px;
-            display: inline-block;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            transform: rotate(-2deg);
         }
 
         .nominate-section {
             text-align: center;
-            margin: 50px 0;
+            width: 100%;
+            margin-bottom: 30px;
         }
 
-        .nominate-now {
-            color: #ffd700;
-            font-size: 58px;
-            font-weight: 900;
+        .nominate-title {
+            font-size: 28px;
+            font-weight: 800;
             text-transform: uppercase;
-            text-shadow: 3px 3px 0 #000;
             margin-bottom: 20px;
-            letter-spacing: 2px;
+            color: var(--accent);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
         }
 
-        .cta-button {
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
-            color: #b21f1f;
-            font-size: 32px;
-            font-weight: bold;
-            padding: 20px 60px;
+        .start-btn {
+            background: linear-gradient(45deg, var(--accent), #ffd54f);
+            color: var(--dark);
             border: none;
+            padding: 18px 40px;
+            font-size: 22px;
+            font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            text-transform: uppercase;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
-            margin: 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 280px;
         }
 
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .start-btn:active {
+            transform: translateY(1px);
         }
 
         .contact {
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
+            margin-top: 30px;
+            width: 100%;
         }
 
         .phone {
-            color: white;
-            font-size: 36px;
-            font-weight: bold;
-            background: rgba(0,0,0,0.7);
-            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 15px 25px;
             border-radius: 50px;
-            display: inline-block;
-            letter-spacing: 2px;
+            font-size: 20px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .decoration {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            top: -150px;
-            right: -150px;
+        .phone i {
+            color: var(--accent);
         }
 
-        .decoration-2 {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: rgba(255,215,0,0.2);
-            border-radius: 50%;
-            bottom: -100px;
-            left: -100px;
-        }
-
-        .matatu-silhouette {
-            position: absolute;
-            bottom: 50px;
-            right: 50px;
-            width: 200px;
-            height: 100px;
-            background: rgba(0,0,0,0.5);
-            border-radius: 20px 20px 0 0;
-            transform: rotate(-5deg);
-        }
-
-        .matatu-silhouette::before {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 40px;
-            background: rgba(255,215,0,0.3);
-            top: -20px;
-            left: 20px;
-            border-radius: 10px;
-        }
-
-        .sponsors {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
+        .footer {
             text-align: center;
-            color: rgba(255,255,255,0.7);
-            font-size: 16px;
-            padding: 10px;
+            margin-top: 30px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            width: 100%;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @media (max-width: 850px) {
-            .poster {
-                width: 100%;
-                height: auto;
-                min-height: 100vh;
+        .features {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin: 25px 0;
+        }
+
+        .feature {
+            text-align: center;
+            flex: 1;
+            padding: 0 10px;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 24px;
+            color: var(--accent);
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Animation for elements */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .title {
+                font-size: 28px;
             }
 
-            .main-title {
-                font-size: 48px;
+            .subtitle {
+                font-size: 18px;
             }
 
-            .matatu-text {
-                font-size: 52px;
-            }
-
-            .awards-2025 {
-                font-size: 36px;
-            }
-
-            .nominate-now {
-                font-size: 42px;
-            }
-
-            .cta-button {
+            .nominate-title {
                 font-size: 24px;
-                padding: 15px 40px;
+            }
+
+            .start-btn {
+                font-size: 20px;
+                padding: 16px 30px;
             }
 
             .phone {
-                font-size: 28px;
+                font-size: 18px;
+            }
+
+            .features {
+                flex-direction: column;
+                gap: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="poster">
-        <div class="decoration"></div>
-        <div class="decoration-2"></div>
+    <div class="container">
+        <header class="header animated">
+            <div class="logo">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h1 class="title">SOUTH RIFT<br>MATATU<br>AWARDS 2025</h1>
+            <div class="edition">SECOND EDITION</div>
+        </header>
 
-        <div class="header">
-            <div class="year-2021">SOUTH RIFT</div>
-            <div class="main-title">MATATU</div>
-            <div class="matatu-text">AWARDS 2025</div>
-            <div class="edition-badge">SECOND EDITION</div>
+        <section class="patron-section animated delay-1">
+            <div class="patron-title">PATRON</div>
+            <div class="patron-name">KENDA VIN</div>
+        </section>
+
+        <section class="nominate-section animated delay-2">
+            <h2 class="nominate-title">NOMINATE NOW!</h2>
+            <button class="start-btn">
+                <i class="fas fa-play-circle"></i> START
+            </button>
+        </section>
+
+        <div class="features animated delay-2">
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <div class="feature-text">Multiple Categories</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="feature-text">Public Voting</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="feature-text">2025 Event</div>
+            </div>
         </div>
 
-        <div class="category">
-            <div class="category-title">Parton:Kenda Vin</div>
-        </div>
+        <section class="contact animated delay-3">
+            <div class="phone">
+                <i class="fas fa-phone-alt"></i> 0747339043
+            </div>
+        </section>
 
-        <div class="nominate-section">
-            <div class="nominate-now">Nominate Now!</div>
-            <button class="cta-button">Start</button>
-        </div>
-
-        <div class="contact">
-            <div class="phone">0747339043</div>
-        </div>
-
-        <div class="matatu-silhouette"></div>
-
-        <div class="sponsors">
+        <footer class="footer animated delay-3">
             Official Event • South Rift Matatu Awards 2025
-        </div>
+        </footer>
     </div>
 
     <script>
-        // Add some interactive effects
+        // Add interactive functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const ctaButton = document.querySelector('.cta-button');
-            const poster = document.querySelector('.poster');
+            const startBtn = document.querySelector('.start-btn');
 
-            ctaButton.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
+            // Button click effect
+            startBtn.addEventListener('click', function() {
+                // Add ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = event.clientX - rect.left - size/2;
+                const y = event.clientY - rect.top - size/2;
+
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+
+                this.appendChild(ripple);
+
+                // Remove ripple after animation
                 setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 150);
+                    ripple.remove();
+                }, 600);
+
+                // In a real app, this would navigate to the nomination form
+                alert('Nomination form would open here!');
             });
 
-            // Add subtle animation to background
-            let hue = 0;
-            setInterval(() => {
-                hue = (hue + 0.5) % 360;
-                poster.style.background = `linear-gradient(135deg,
-                    hsl(${hue}, 70%, 30%),
-                    hsl(${(hue + 40) % 360}, 70%, 40%),
-                    hsl(${(hue + 80) % 360}, 70%, 50%))`;
-            }, 100);
+            // Add ripple effect styles
+            const style = document.createElement('style');
+            style.textContent = `
+                .ripple {
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                    animation: ripple-animation 0.6s linear;
+                }
+
+                @keyframes ripple-animation {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+
+                .start-btn {
+                    position: relative;
+                    overflow: hidden;
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
 </body>
