@@ -65,7 +65,7 @@
                             Our Valued Sponsors
                         </h3>
                         <p class="mt-2 mb-8 text-base text-gray-600">
-                            A heartfelt thank you to all our sponsors for their invaluable support and commitment to the success of the South-Rift Matatu Awards 2024!
+                            A heartfelt thank you to all our sponsors for their invaluable support and commitment to the success of the South-Rift Matatu Awards 2025!
                         </p>
                     </section>
 
