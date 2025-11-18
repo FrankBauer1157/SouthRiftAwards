@@ -17,7 +17,7 @@ Route::get('/', function () {
 // Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 // Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
 
-// Route::get('/nomination', action: [NominationController::class, 'create'])->name('nomination.create');
+ Route::get('/nomination', action: [NominationController::class, 'create'])->name('nomination.create');
 // Route::post('/nomination', [NominationController::class, 'store'])->name('nomination.store');
 // Route::get('/nominations', [NominationController::class, 'index'])->name('nominations.index');
 
@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/nominations/admin', [NominationController::class, 'adminView'])->name('nominations.admin'); // Admin view
-    Route::get('/nomination', [NominationController::class, 'create'])->name('nomination.create');
+    // Route::get('/nomination', [NominationController::class, 'create'])->name('nomination.create');
     Route::get('/nomination/votes', [NominationController::class, 'votes'])->name('nominations.votes');
 });
 
