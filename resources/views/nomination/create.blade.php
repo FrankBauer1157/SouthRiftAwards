@@ -248,7 +248,7 @@ function loadcategories() {
     .then(data => {
         // Clear existing options
         const categorySelect = document.getElementById('category');
-        categorySelect.innerHTML = '<option value="">-- Select a Category --</option>';
+        categorySelect.innerHTML = '<option value="">-- Select a Category. --</option>';
 
         if (data.length === 0) {
             // If no categories are returned, call the done() function
