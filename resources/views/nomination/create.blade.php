@@ -80,58 +80,143 @@
 
 
 {{-- image --}}
-<div class="row">
-    <div class="col-md-4">
-        <div class="container">
-            {{-- <h3 class="text-center">Nominate Your Favorite South-Rift Matatu Awardee</h3> --}}
-            {{-- <p class="lead">Nominate someone you admire and believe in for the South-Rift Matatu Awards 2024.</p> --}}
+
+    <div class="container-main">
+        <div class="text-center mb-4">
+            <h1 class="display-5 fw-bold text-primary">South-Rift Matatu Awards 2024</h1>
+            <p class="lead">Nominate your favorite personalities for the South-Rift Matatu Awards</p>
+        </div>
+
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step active" id="step1">
+                <div class="step-circle">1</div>
+                <div class="step-line"></div>
+                <div class="step-text">Information</div>
+            </div>
+            <div class="step" id="step2">
+                <div class="step-circle">2</div>
+                <div class="step-line"></div>
+                <div class="step-text">Nomination</div>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-circle">3</div>
+                <div class="step-text">Complete</div>
+            </div>
+        </div>
+
+        <!-- Information Section -->
+        <div class="section active" id="info-section">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card card-custom">
+                        <div class="card-header card-header-custom text-center">
+                            <h3 class="mb-0">Nomination Information</h3>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row align-items-center">
+                                <div class="col-md-5 text-center mb-4 mb-md-0">
+                                    <img src="{{ asset('success.png') }}" alt="Nomination" class="illustration">
+                                </div>
+                                <div class="col-md-7">
+                                    <h4 class="mb-3">How It Works</h4>
+                                    <div class="info-item">
+                                        <span class="info-icon">✓</span>
+                                        <div>
+                                            <h6 class="mb-1">Nomination Phase</h6>
+                                            <p class="mb-0 text-muted">Submit your nominations for your favorite personalities.</p>
+                                        </div>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-icon">✓</span>
+                                        <div>
+                                            <h6 class="mb-1">Judging Process</h6>
+                                            <p class="mb-0 text-muted">All nominations will be reviewed by our panel of judges.</p>
+                                        </div>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-icon">✓</span>
+                                        <div>
+                                            <h6 class="mb-1">Voting Phase</h6>
+                                            <p class="mb-0 text-muted">Voting will begin immediately after nominations are complete.</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <button class="btn btn-primary-custom w-100" onclick="showNominationForm()">Start Nomination</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nomination Form Section -->
+        <div class="section" id="nomination-section">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card card-custom">
+                        <div class="card-header card-header-custom text-center">
+                            <h3 class="mb-0">Submit Your Nomination</h3>
+                        </div>
+                        <div class="card-body p-4">
+                            <form id="nominationForm" action="{{ route('nomination.store') }}" method="POST">
+                                @csrf
+                                <div class="mb-4">
+                                    <label for="category" class="form-label">Award Category</label>
+                                    <select name="category_id" id="category" class="form-select form-control-custom" required>
+                                        <option value="">-- Select a Category --</option>
+                                        <!-- Categories will be populated here -->
+                                    </select>
+                                    <p class="note-text mt-2">
+                                        <strong>Note:</strong> Categories you've already nominated for will not appear in this list.
+                                    </p>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="name" class="form-label">Nominee Name</label>
+                                    <input type="text" name="name" id="name" class="form-control form-control-custom" placeholder="Enter the nominee's full name" required>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="reason" class="form-label">Reason for Nomination</label>
+                                    <textarea name="reason" id="reason" class="form-control form-control-custom" rows="5" placeholder="Please explain why this nominee deserves to win in this category..." required></textarea>
+                                    <div class="form-text">Be specific about the nominee's achievements and contributions.</div>
+                                </div>
+
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button type="button" class="btn btn-outline-secondary me-md-2" onclick="showInfoSection()">Back</button>
+                                    <button type="submit" class="btn btn-primary-custom">Submit Nomination</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completion Section -->
+        <div class="section" id="completion-section">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="card card-custom">
+                        <div class="card-body text-center p-5">
+                            <div class="success-icon">✓</div>
+                            <h3 class="mb-3">Thank You for Your Nomination!</h3>
+                            <p class="mb-4">Your nomination has been successfully submitted and is now under review by our judges.</p>
+                            <div class="alert alert-info">
+                                <h5>What's Next?</h5>
+                                <p class="mb-0">Nominations have ended. Thank you for participating! Please stay tuned—voting for the South-Rift Matatu Awards 2025 will begin soon.</p>
+                            </div>
+                            <button class="btn btn-primary-custom mt-3" onclick="showInfoSection()">Return to Home</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div id="info" class="col-md-4">
-        <img src="{{ asset('success.png') }}" alt="Nominate" class="img-fluid">
-        {{-- <p class="text-muted">Submit your nomination for the South-Rift Matatu Awards 2024.</p> --}}
-        <p class="text-muted">Please note that all nominations will be reviewed by the judges and may be subject to change.</p>
-        <p class="text-muted">Please provide accurate and relevant information.</p>
-        <!-- once the nomination is complete, awardee shall be listed and election shall be held. -->
-        <p class="text-muted">Please note, this is the nomination phase. Voting for the South-Rift Matatu Awards 2024 will take place immediately after nominations are complete.</p>
 
-        {{-- button --}}
-        <a  onclick=showcategories() class="btn btn-primary w-100">Start</a>
-    </div>
-    <div class="col-md-4" id="categories" style="display: none">
-
-        <form id="nominationForm" action="{{ route('nomination.store') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <label for="category" class="form-label">Category</label>
-                <select name="category_id" id="category" class="form-select" required>
-                    <option value="">-- Select a Category --</option>
-                </select>
-
-                <label><b>Note:</b> The categories you have nominated for will not appear here.</label>
-
-            </div>
-
-            <div class="mb-3">
-                <label for="name" class="form-label">Nominee Name</label>
-                <input type="text" name="name" id="name" class="form-control" placeholder="Enter nominee's name" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="reason" class="form-label">Reason for Nomination</label>
-                <textarea name="reason" id="reason" class="form-control" rows="4" placeholder="Explain why this nominee deserves to win" required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">Submit Nomination</button>
-        </form>
-    </div>
-    <div hidden id="done" class="col-md-4">
-        <img src="{{ asset('success.png') }}" alt="Nominate" class="img-fluid">
-        <h4>Nominations have ended. Thank you for participating! Please stay tuned—voting for the South-Rift Matatu Awards 2024 will begin soon."</h4>
-
-    </div>
-</div>
-    </div>
 
     <!-- Modal -->
 <!-- Modal -->
