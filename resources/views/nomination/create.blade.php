@@ -1,6 +1,11 @@
-@extends('layouts.app')
-
- <style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>South-Rift Matatu Awards 2024</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
         :root {
             --primary-color: #4361ee;
             --secondary-color: #3f37c9;
@@ -231,13 +236,15 @@
                 height: 36px;
             }
         }
+
+        .modal-response-img {
+            max-width: 120px;
+            margin: 0 auto 20px;
+            display: block;
+        }
     </style>
-@section('content')
-
-
-
-{{-- image --}}
-
+</head>
+<body>
     <div class="container-main">
         <div class="text-center mb-4">
             <h1 class="display-5 fw-bold text-primary">South-Rift Matatu Awards 2024</h1>
@@ -324,7 +331,7 @@
                                     <label for="category" class="form-label">Award Category</label>
                                     <select name="category_id" id="category" class="form-select form-control-custom" required>
                                         <option value="">-- Select a Category --</option>
-                                        <!-- Categories will be populated here -->
+                                        <!-- Categories will be populated by JavaScript -->
                                     </select>
                                     <p class="note-text mt-2">
                                         <strong>Note:</strong> Categories you've already nominated for will not appear in this list.
@@ -374,189 +381,173 @@
         </div>
     </div>
 
-
-    <!-- Modal -->
-<!-- Modal -->
-<!-- Modal -->
-<div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="responseModalLabel">Nomination Status</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <input type="text" name="phone" style="display:none;">
-            </div>
-            <div class="modal-body">
-                <!-- Image to display based on success/failure -->
-                <img id="responseImage" src="" alt="Response Image" class="mb-3 img-fluid" />
-                <div id="responseMessage" class="alert" style="display: block;"></div> <!-- This will display the message -->
-            </div>
-            <div class="modal-footer">
-                <label>Patron: Kenda Vin</label>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <!-- Response Modal -->
+    <div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="responseModalLabel">Nomination Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="responseImage" src="" alt="Response" class="modal-response-img">
+                    <p id="responseMessage" class="mb-0"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">OK</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            loadcategories();
 
-@endsection
+            const form = document.getElementById('nominationForm');
+            const responseModal = new bootstrap.Modal(document.getElementById('responseModal'));
+            const responseMessage = document.getElementById('responseMessage');
+            const responseImage = document.getElementById('responseImage');
 
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission behavior
 
-<!-- Include Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-//done()
-   loadcategories()
+                const formData = new FormData(form);
 
+                // Send the AJAX request
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                    }
+                })
+                .then(response => response.json()) // Parse the JSON response
+                .then(data => {
+                    // Display the message in the modal
+                    responseMessage.textContent = data.message;
+                    responseMessage.style.color = data.success ? 'black' : 'red'; // Success = green, error = red
 
-    const form = document.getElementById('nominationForm');
-    const responseModal = new bootstrap.Modal(document.getElementById('responseModal'));
-    const responseMessage = document.getElementById('responseMessage');
-    const responseImage = document.getElementById('responseImage');  // Ensure you have this element
+                    // Set the image based on success/failure
+                    if (data.success) {
+                        responseImage.src = "/thisok.png";  // Correct path to image in public folder
+                    } else {
+                        responseImage.src = "/failed2.jpg"; // Set error image
+                    }
 
-    form.addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent the default form submission behavior
+                    responseModal.show();
+                    loadcategories();
 
-        const formData = new FormData(form);
+                    // Reset the form only if the submission is successful
+                    if (data.success) {
+                        form.reset();
+                        // Show completion section after successful submission
+                        showCompletion();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    responseMessage.textContent = 'An error occurred. Please try again.';
+                    responseMessage.style.color = 'red';
 
-        // Send the AJAX request
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-            }
-        })
-        .then(response => response.json()) // Parse the JSON response
-        .then(data => {
-            // Display the message in the modal
-            responseMessage.textContent = data.message;
-            responseMessage.style.color = data.success ? 'black' : 'red'; // Success = green, error = red
-
-            // Set the image based on success/failure
-            if (data.success) {
-                responseImage.src = "/thisok.png";  // Correct path to image in public folder
-            } else {
-                responseImage.src = "/failed2.jpg"; // Set error image
-            }
-
-            responseModal.show();
-            loadcategories()
-
-            // Reset the form only if the submission is successful
-            if (data.success) {
-                form.reset();
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            responseMessage.textContent = 'An error occurred. Please try again.';
-            responseMessage.style.color = 'red';
-
-            // Show error image if there is an issue
-            responseImage.src = "/path_to_error_image.png"; // Error image
-            responseModal.show();
+                    // Show error image if there is an issue
+                    responseImage.src = "/failed2.jpg"; // Error image
+                    responseModal.show();
+                });
+            });
         });
-    });
-});
 
+        // Function to show the nomination form
+        function showNominationForm() {
+            document.getElementById('info-section').classList.remove('active');
+            document.getElementById('nomination-section').classList.add('active');
+            document.getElementById('completion-section').classList.remove('active');
 
+            // Update step indicator
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+            document.getElementById('step3').classList.remove('active');
+        }
 
+        // Function to show the info section
+        function showInfoSection() {
+            document.getElementById('info-section').classList.add('active');
+            document.getElementById('nomination-section').classList.remove('active');
+            document.getElementById('completion-section').classList.remove('active');
 
+            // Update step indicator
+            document.getElementById('step1').classList.add('active');
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.remove('active');
+        }
 
-//showcategories onclick
-function showcategories() {
-    const categories = document.getElementById('categories');
-    const info = document.getElementById('info');
-    if (categories.style.display === 'none') {
+        // Function to show completion section
+        function showCompletion() {
+            document.getElementById('info-section').classList.remove('active');
+            document.getElementById('nomination-section').classList.remove('active');
+            document.getElementById('completion-section').classList.add('active');
 
-        categories.style.display = 'block';
-        info.style.display = 'none';
-    } else {
-        categories.style.display = 'none';
-        info.style.display = 'block';
-    }
-}
+            // Update step indicator
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.add('active');
+        }
 
-function loadcategories() {
-    const categorySelect = document.getElementById('category');
+        function loadcategories() {
+            const categorySelect = document.getElementById('category');
 
-        // Fetch categories based on IP check
-        fetch('/categories/check')
-    .then(response => response.json())
-    .then(data => {
-        // Clear existing options
-        const categorySelect = document.getElementById('category');
-        categorySelect.innerHTML = '<option value="">-- Select a Category. --</option>';
+            // Fetch categories based on IP check
+            fetch('/categories/check')
+            .then(response => response.json())
+            .then(data => {
+                // Clear existing options
+                const categorySelect = document.getElementById('category');
+                categorySelect.innerHTML = '<option value="">-- Select a Category --</option>';
 
-        if (data.length === 0) {
-            // If no categories are returned, call the done() function
-            done();
-        } else {
-            undone();
-            // Add fetche;d categories to the select dropdown
-            data.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category.id;
-                option.textContent = category.name;
-                categorySelect.appendChild(option);
+                if (data.length === 0) {
+                    // If no categories are returned, call the done() function
+                    done();
+                } else {
+                    undone();
+                    // Add fetched categories to the select dropdown
+                    data.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category.id;
+                        option.textContent = category.name;
+                        categorySelect.appendChild(option);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching categories:', error);
+                // Optional: Handle errors if needed
             });
         }
-    })
-    .catch(error => {
-        console.error('Error fetching categories:', error);
-        // Optional: Handle errors if needed
-    });
 
+        function done() {
+            document.getElementById('info-section').classList.remove('active');
+            document.getElementById('nomination-section').classList.remove('active');
+            document.getElementById('completion-section').classList.add('active');
 
+            // Update step indicator
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.add('active');
+        }
 
-}
+        function undone() {
+            // Ensure the nomination form is available
+            document.getElementById('info-section').classList.add('active');
+            document.getElementById('nomination-section').classList.remove('active');
+            document.getElementById('completion-section').classList.remove('active');
 
-function done() {
-    const done = document.getElementById('done');
-    const info = document.getElementById('info');
-    const categories = document.getElementById('categories');
-  info.style.display = 'none';
-  categories.style.display = 'none';
-  done.style.display = 'block';
-}
-
-function undone() {
-    const done = document.getElementById('done');
-    const info = document.getElementById('info');
-    const categories = document.getElementById('categories');
-//   info.style.display = 'block';
-//   categories.style.display = 'block';
-  done.style.display = 'none';
-}
-
-
-
-
-
-
-
-// function done() {
-//     const done = document.getElementById('done');
-//     const info = document.getElementById('info');
-//     const categories = document.getElementById('categories');
-//   info.style.display = 'none';
-//   categories.style.display = 'none';
-//   done.style.display = 'block';
-// }
-
-// function undone() {
-//     const done = document.getElementById('done');
-//     const info = document.getElementById('info');
-//     const categories = document.getElementById('categories');
-// //   info.style.display = 'block';
-// //   categories.style.display = 'block';
-//   done.style.display = 'none';
-// }
-
-
-
-</script>
+            // Update step indicator
+            document.getElementById('step1').classList.add('active');
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
