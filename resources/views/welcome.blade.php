@@ -1,6 +1,6 @@
 <html>
 <head>
-  
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Vote for your favorite contestants in the South Rift Matatu Awards-2024. Cast your vote and help decide the winners!">
@@ -38,7 +38,7 @@
                 -webkit-text-fill-color: transparent;
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
             ">
-                        SOUTH-RIFT MATATU AWARDS - 2024
+                        South-Rift Matatu Awards - 2025
                     </h3>
                     <p class="mt-4 text-lg text-gray-200">
                         @if(session('message'))

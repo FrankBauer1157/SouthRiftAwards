@@ -149,7 +149,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <h1 class="navbar-brand" href="#">South-Rift Matatu Awards - 2024</h1>
+        <h1 class="navbar-brand" href="#">South-Rift Matatu Awards - 2025</h1>
         <!-- Offcanvas toggle button (hidden on large screens) -->
         <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>

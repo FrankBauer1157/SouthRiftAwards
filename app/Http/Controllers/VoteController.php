@@ -193,7 +193,7 @@ public function submitVote(Request $request)
             'category_id' => 0,
         ]);
     }
-    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2024.');
+    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2025.');
         return response()->json([
             'success' => false,
             'redirect' => route('sponsors'),
@@ -321,7 +321,7 @@ $currentTime = now('Africa/Nairobi');
             'category_id' => 0,
         ]);
     }
-    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2024.');
+    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2025.');
         return response()->json([
             'success' => false,
             'redirect' => route('sponsors'),
@@ -406,7 +406,7 @@ public function submitVoteOpenWindowxx(Request $request)
     }
 
     // Flash message thanking the user for participating
-    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2024.');
+    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2025.');
 
     // Return JSON response with redirect URL
     return response()->json([
@@ -506,7 +506,7 @@ public function submitVoteOpenWindow(Request $request)
     }
 
     // Flash message thanking the user for participating
-    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2024.');
+    session()->flash('message', 'Thank you for participating in South-Rift Matatu Awards - 2025.');
 
     // Return JSON response with redirect URL
     return response()->json([

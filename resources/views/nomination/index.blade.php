@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="mx-5 mt-5">
-    <!-- <h3 class="mb-4 text-center">SOUTH-RIFT MATATU AWARDS - 2024</h3> -->
+    <!-- <h3 class="mb-4 text-center">South-Rift Matatu Awards - 2025</h3> -->
 
     @foreach ($categories as $category)
     <div class="mb-5">
