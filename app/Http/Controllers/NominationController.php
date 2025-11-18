@@ -39,13 +39,7 @@ class NominationController extends Controller
         $categories = Category::with('nominations')->get();
 
         // Get distinct 'wkfld' values for each category
-        $categoriesWithNominations = Category::with(['nominations' => function($query) {
-            $query->select('wkfld', 'category_id')
-                  ->selectRaw('COUNT(*) as nomination_count') // Count nominations for each nominee
-                  ->whereNotNull('wkfld') // Exclude NULL values
-                  ->where('wkfld', '!=', '') // Exclude empty strings
-                  ->groupBy('wkfld', 'category_id'); // Group by nominee and category
-        }])->get();
+        $categoriesWithNominations = Category::withCount('nominations')->get();
 
 
 
