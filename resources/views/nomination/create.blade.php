@@ -166,7 +166,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 //done()
- //   loadcategories()
+   loadcategories()
 
 
     const form = document.getElementById('nominationForm');
