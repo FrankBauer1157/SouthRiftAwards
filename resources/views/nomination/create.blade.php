@@ -125,7 +125,7 @@
             <button type="submit" class="btn btn-primary w-100">Submit Nomination</button>
         </form>
     </div>
-    <div id="done" class="col-md-4">
+    <div hidden id="done" class="col-md-4">
         <img src="{{ asset('success.png') }}" alt="Nominate" class="img-fluid">
         <h4>Nominations have ended. Thank you for participating! Please stay tuned—voting for the South-Rift Matatu Awards 2024 will begin soon."</h4>
 
