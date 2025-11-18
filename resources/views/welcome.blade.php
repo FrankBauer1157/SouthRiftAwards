@@ -363,8 +363,7 @@
                     ripple.remove();
                 }, 600);
 
-                // In a real app, this would navigate to the nomination form
-                alert('Nomination form would open here!');
+                window.location.href = "/nomination/create";
             });
 
             // Add ripple effect styles
@@ -393,5 +392,6 @@
             document.head.appendChild(style);
         });
     </script>
+
 </body>
 </html>
