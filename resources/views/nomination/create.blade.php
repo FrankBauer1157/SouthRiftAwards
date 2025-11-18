@@ -247,7 +247,7 @@
 <body>
     <div class="container-main">
         <div class="text-center mb-4">
-            <h1 class="display-5 fw-bold text-primary">South-Rift Matatu Awards 2024</h1>
+            <h1 class="display-5 fw-bold text-primary">South-Rift Matatu Awards 2025</h1>
             <p class="lead">Nominate your favorite personalities for the South-Rift Matatu Awards</p>
         </div>
 
