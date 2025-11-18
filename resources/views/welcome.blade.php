@@ -111,8 +111,13 @@
         </main>
         <section class="text-center">
             {{-- vote now button --}}
-            <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+            {{-- <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
                 <a href="{{ route('vote.index') }}" class="inline-block px-8 py-3 text-lg font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">
+                    Vote Now
+                </a>
+            </div> --}}
+             <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                <a href="{{ url('/nominate') }}" class="inline-block px-8 py-3 text-lg font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">
                     Vote Now
                 </a>
             </div>

@@ -13,8 +13,8 @@
     <meta property="og:image" content="{{ asset('logo.jpeg') }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    
-    <title>SRMA 2024 - Voting is on!</title>
+
+    <title>SRMA 2025 - Voting is on!</title>
 
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
