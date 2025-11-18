@@ -363,7 +363,7 @@
                     ripple.remove();
                 }, 600);
 
-                window.location.href = "/nomination/create";
+                window.location.href = "/nominate";
             });
 
             // Add ripple effect styles
